@@ -1,0 +1,86 @@
+@import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
+html,body{
+	margin:0;
+	padding: 0;
+	text-decoration: none;
+	height : 100%;
+	width : 100;
+	color : #fff;
+}
+
+body{
+	background: url('../img/background2.jpg');
+	background-repeat: no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	width:100%;
+}
+
+body.backcolor{
+	background-color: #13A4CF; 
+	position: fixed;
+	top: 0;
+	width:100%;
+	height:10%; 
+	box-shadow: 1px 1px 10px 2px;
+}
+
+.inlineheader,header{
+	height:100%;
+}
+header{
+	font-family: 'Architects Daughter',cursive;
+}
+div.logo{
+	font-size: 2em;
+	text-align: center;
+	margin: .30% 2%;
+	/*border: 1px solid white;*/
+	width:20%;
+	height: 90%;
+	line-height: 220%;
+	display: inline-block;
+}
+
+div.logo p{
+	vertical-align: middle;
+}
+
+.signopt button{
+}
+
+.signopt{
+	display: inline-block;
+	margin-left: 54%;
+}
+.signopt button{
+	margin-right: 2%;
+}	
+.signopt img{
+	display: inline-block;
+	width : 12%;
+	height : auto;
+	cursor : pointer;
+}
+
+.main{
+	width: 80%;
+	/*border : 1px solid #fff;*/
+	margin-top: 10%;
+	margin-left: 2%;
+}
+.main h3{
+	color: #13A4CF;
+	font-weight: bolder;
+}
+.main h1{
+	font-size: 4em;
+	font-weight: bolder;
+}
+.main p{font-family: 'Architects Daughter',cursive;
+font-size: 2em;}
+.main img{
+	margin-left : 1%;
+	width : 3%;
+}
