@@ -1,20 +1,22 @@
 @import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
+/*resetting*/
 html,body{
 	margin:0;
 	padding: 0;
 	text-decoration: none;
 	height : 100%;
-	width : 100;
+	width : 100%;
 	color : #fff;
 }
 
 body{
-	background: url('../img/background2.jpg');
-	background-repeat: no-repeat center center fixed; 
+	background: url('../img/background.jpg');
+	background-repeat: no-repeat center center fixed;
+	-moz-background-repeat: no-repeat center center fixed; 
+	background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
-	width:100%;
 }
 
 body.backcolor{
@@ -26,6 +28,7 @@ body.backcolor{
 	box-shadow: 1px 1px 10px 2px;
 }
 
+/*header styling*/
 .inlineheader,header{
 	height:100%;
 }
@@ -46,13 +49,13 @@ div.logo{
 div.logo p{
 	vertical-align: middle;
 }
-
+/*sign opt style*/
 .signopt button{
 }
 
 .signopt{
 	display: inline-block;
-	margin-left: 50%;
+	margin-left: 46%;
 }
 .signopt button{
 	margin-right: 2%;
@@ -63,7 +66,7 @@ div.logo p{
 	height : auto;
 	cursor : pointer;
 }
-
+/*main part style*/
 .main{
 	width: 80%;
 	/*border : 1px solid #fff;*/
@@ -83,4 +86,8 @@ font-size: 2em;}
 .main img{
 	margin-left : 1%;
 	width : 3%;
+}
+#sideNavbtn{
+	position: absolute;
+	right : 7%;
 }
