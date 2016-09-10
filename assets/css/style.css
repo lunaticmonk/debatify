@@ -91,3 +91,17 @@ font-size: 2em;}
 	position: absolute;
 	right : 7%;
 }
+/*login panel style*/
+
+#loginpanel{
+	position:absolute;
+	top: 25%;
+	left: 32%;
+	background-color: #fff;
+	width:40%;
+	margin: auto auto;
+}
+#loginpanel *{
+	padding-left: 2%;
+	padding-right:15%;
+}
