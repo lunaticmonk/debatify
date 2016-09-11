@@ -14,8 +14,10 @@
 	signinbtn.addEventListener('click',function(){
 		console.log('hello');
 		loginpanel.style.visibility = "visible";
-		// loginpanel.style.transition = "opacity 5s";
-		// loginpanel.style.opacity = "1";
+		closebtn = document.querySelector('#closebtn');
+		closebtn.addEventListener('click',function(){
+			loginpanel.style.visibility = "hidden";
+		});
 	});
  })();
   // Initialize collapsible (uncomment the line below if you use the dropdown variation)

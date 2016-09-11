@@ -91,9 +91,14 @@ font-size: 2em;}
 	position: absolute;
 	right : 7%;
 }
+.social img{
+	display: inline-block;
+	cursor: pointer;
+}
 /*login panel style*/
 
 #loginpanel{
+	color: #000;
 	position:absolute;
 	top: 25%;
 	left: 32%;
@@ -101,7 +106,13 @@ font-size: 2em;}
 	width:40%;
 	margin: auto auto;
 }
-#loginpanel *{
-	padding-left: 2%;
-	padding-right:15%;
+#loginpanel div{
+	padding:2%;
+}
+#closebtn{
+	display: block;
+	cursor: pointer;
+	position: absolute;
+	right: 0%;
+	color: #000;
 }
