@@ -10,7 +10,7 @@ html,body{
 }
 
 body{
-	background: url('../img/background.jpg');
+	background: url('../img/suits.jpg');
 	background-repeat: no-repeat center center fixed;
 	-moz-background-repeat: no-repeat center center fixed; 
 	background-size: cover;
@@ -89,7 +89,8 @@ font-size: 2em;}
 }
 #sideNavbtn{
 	position: absolute;
-	right : 7%;
+	right : 2%;
+	top: 35%;
 }
 .social img{
 	display: inline-block;
@@ -98,7 +99,9 @@ font-size: 2em;}
 /*login panel style*/
 
 #loginpanel{
+	font-family: 'Architects Daughter';
 	color: #000;
+	font-size: 2em;
 	position:absolute;
 	top: 25%;
 	left: 32%;
@@ -109,10 +112,13 @@ font-size: 2em;}
 #loginpanel div{
 	padding:2%;
 }
-#closebtn{
+#closebtn img{
+	width:6%;
+	height:auto;
 	display: block;
 	cursor: pointer;
 	position: absolute;
-	right: 0%;
+	right: 5%;
+	top:10%;
 	color: #000;
 }

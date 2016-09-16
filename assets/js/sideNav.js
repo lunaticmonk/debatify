@@ -14,11 +14,12 @@
 	signinbtn.addEventListener('click',function(){
 		console.log('hello');
 		loginpanel.style.visibility = "visible";
-		closebtn = document.querySelector('#closebtn');
+	var closebtn = document.querySelector('#closebtn');
 		closebtn.addEventListener('click',function(){
-			loginpanel.style.visibility = "hidden";
+			loginpanel.style.visibility = 'hidden';
 		});
 	});
+
  })();
   // Initialize collapsible (uncomment the line below if you use the dropdown variation)
   //$('.collapsible').collapsible();
