@@ -108,6 +108,8 @@ font-size: 2em;}
 	background-color: #fff;
 	width:40%;
 	margin: auto auto;
+	border-radius: 2%;
+	box-shadow: 5% 5% 5% 5%;
 }
 #loginpanel div{
 	padding:2%;
@@ -121,4 +123,7 @@ font-size: 2em;}
 	right: 5%;
 	top:10%;
 	color: #000;
+}
+#loginbtn{
+	margin: 2% 2%;
 }
