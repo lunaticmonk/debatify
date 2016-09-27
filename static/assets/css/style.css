@@ -124,6 +124,28 @@ font-size: 2em;}
 	top:10%;
 	color: #000;
 }
-#loginbtn{
+#loginbtn,#form-submit{
 	margin: 2% 40%;
+}
+
+#signup{
+	font-family: 'Architects Daughter';
+	color: #000;
+	font-size: 2em;
+	position:absolute;
+	top: 25%;
+	left: 32%;
+	background-color: #fff;
+	width:40%;
+	margin: 2% auto;
+	border-radius: 2%;
+	box-shadow: 5% 5% 5% 5%;
+}
+#closesignup img{
+	width:6%;
+	height:auto;
+	display: block;
+	cursor: pointer;
+	float: right;
+	color: #000;
 }
