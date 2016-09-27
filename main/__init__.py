@@ -11,7 +11,7 @@ bootstrap = Bootstrap(app)
 
 @app.route('/')
 def index():
-	return render_template('../templates/me.html',name = 'sumedh')
+	return render_template('../index.html')
 	#return '<p>hello sumedh!</p>'			
 
 
