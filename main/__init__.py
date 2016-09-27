@@ -7,10 +7,11 @@ from flask_script import Manager
 
 app = Flask(__name__)
 manager = Manager(app)
+bootstrap = Bootstrap(app)
 
-@app.route('/user')
+@app.route('/')
 def index():
-	return render_template('../templates/index.html')
+	return render_template('../templates/me.html',name = 'sumedh')
 	#return '<p>hello sumedh!</p>'			
 
 
