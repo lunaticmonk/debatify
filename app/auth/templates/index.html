@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Debatify</title>
+		<link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/css/bootstrap.min.css")}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/materialize/css/materialize.css")}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/css/style.css")}}">
+	</head>
+
+	<body>
+		<!--header part-->	
+		<div class = "backcolor">
+			<header class = "navbar header">
+				<div class = "inlineheader">
+					<div class = "logo">
+						<p>Logo</p>
+					</div>
+					<div class = "signopt">
+						<button class = "btn " id = "signinbtn">Sign in</button>
+						<button class = "btn" id = "signupbtn">Sign up</button>
+						<img src="{{url_for('static',filename = "assets/img/searchbtn.png")}}">
+						<a href="#" data-activates="slide-out" class="button-collapse" id ="sideNavbtn"><i class="material-icons">menu</i></a>
+					</div>
+
+				</div>
+
+			</header>
+		</div>
+
+		<!--end header-->
+		<!--main part-->
+
+	<ul id="slide-out" class="side-nav">
+	    <li><div class="userView">
+	      <!-- <img class="background" src="assets/img/ff.jpg" style = "width : 100%"> -->
+	      <!-- <a href="#!user"><img class="circle" src="images/yuna.jpg"></a> -->
+	      <a href="#!name"><span class="white-text name"></span></a>
+	      <a href="#!email"><span class="white-text email"></span></a>
+	    </div></li>
+	    <li><a href="#!">Home</a></li>
+	    <li><a href="#!">About</a></li>
+	    <li><a class="waves-effect" href="#!">Blog</a></li>
+	    <li><a href="#!">Contribute</a></li>
+	    <!-- <li><div class="divider"></div></li>
+	    <li><a class="subheader">Subheader</a></li> -->
+   	</ul>
+  
+
+		<div class = "main">
+			<h3>FEATURED ARTICLE</h3>
+			<h1>40 FREAKY,40 FANCY AND FUN PAINTED PORTRAITS</h1>
+			<p>Published by me! &bull; aka Sumedh</p>
+
+			<div class = "social">
+				<img src="{{url_for('static', filename = "assets/img/twitterbird2.png")}}">
+				<img src="{{url_for('static',filename = "assets/img/fb2.png")}}">
+			</div>
+		</div>
+
+		<!--end main part-->
+
+		<!--Login popup-->
+		<div id = "loginpanel">
+			<div id ="closebtn"><img src="{{url_for('static', filename = "assets/img/close.png")}}"></div>
+			<div>Email : <input type = "text" placeholder = "Email Address"></div>
+			<div>Password : <input type ="password" placeholder = "Password"></div>
+			<input class = "btn btn-primary" id = "loginbtn" type = "submit" value = "Submit">
+			<!-- <div>Name : <input type ="text" placeholder = "Name"></div> -->
+		</div>
+		<!--End login popup-->
+		<!--Sign up popup-->
+		<div id = "signup">
+			<div id ="closesignup"><img src="{{url_for('static', filename = "assets/img/close.png")}}"></div>
+			<div class="row">
+			    <form class="col s12" action = "/me" method = "POST">
+			      <div class="row">
+			        <div class="input-field col s6">
+			          <input placeholder="Placeholder" id="first_name" type="text" class="validate" name = "first_name">
+			          <label for="first_name">First Name</label>
+			        </div>
+			        <div class="input-field col s6">
+			          <input id="last_name" type="text" class="validate" name = "last_name">
+			          <label for="last_name">Last Name</label>
+			        </div>
+			      </div>
+			      <div class="row">
+			        <div class="input-field col s12">
+			          <input id="password" type="password" class="validate" name = "password">
+			          <label for="password">Password</label>
+			        </div>
+			      </div>
+			      <div class="row">
+			        <div class="input-field col s12">
+			          <input id="email" type="email" class="validate" name = "email">
+			          <label for="email">Email</label>
+			        </div>
+			      </div>
+			      <input class = "btn btn-primary" id = "form-submit" type = "submit" value = "Submit">
+			    </form>
+  </div>
+        </div>
+
+    <!--End of signup popup-->
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src = "{{url_for('static', filename ="assets/materialize/js/materialize.min.js")}}"></script>
+		<script src = "{{url_for('static', filename = "assets/js/sideNav.js")}}"></script>
+	</body>
+</html>

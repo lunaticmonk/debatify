@@ -1,7 +1,9 @@
-from flask import render_template
-from . import auth
+from flask import Blueprint,render_template
+
+admin = Blueprint('auth',__name__)
+
+@admin.route('/home')
+def home():
+	return '<p>Hello there!</p>'
 
 
-@auth.route('/fuck')
-def login():
-    return render_template('auth/me.html', name = 'Sumedh')

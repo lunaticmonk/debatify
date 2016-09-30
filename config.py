@@ -14,8 +14,8 @@ class Testing(Config):
 	DEBUD = True
 
 config = {
-	'CONFIG' : 'Config',
-	'DEVELOPMENT' : 'Development',
-	'PRODUCTION' : 'Production',
-	'TESTING' : 'Testing'
+	'CONFIG' : Config,
+	'DEVELOPMENT' : Development,
+	'PRODUCTION' : Production,
+	'TESTING' : Testing
 }

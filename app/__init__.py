@@ -1,30 +1,29 @@
-from flask import Flask
+import os
+from flask import Flask,render_template,url_for,request,session,redirect
 from flask_bootstrap import Bootstrap
-#from flask_mail import Mail
-#from flask_moment import Moment
+from flask_script import Manager,Shell
 from flask_sqlalchemy import SQLAlchemy
-from config import config
+#from app import create_app
+#from models import User
+#from flask.ext.sqlalchemy import SQLAlchemy
+#from models import User
+#from flask_wtf import Form
+#from wtforms.validators import Required
 
-#bootstrap = Bootstrap()
-# mail = Mail()
-# moment = Moment()
-#db = SQLAlchemy()
+app = Flask(__name__)
+from app.auth.views import admin
+# basedir = os.path.abspath(os.path.dirname(__file__))
+# app.config['SECRET_KEY'] = 'hard to guess string'
+# app.config['SQLALCHEMY_DATABASE_URI'] =\
+#     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+# app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.register_blueprint(auth.views.admin,url_prefix = '/authentication')
+#app = create_app('DEVELOPMENT')
 
-def create_app(config_name):
-    app = Flask(__name__)
-    app.config.from_object(config[config_name])
-    config[config_name].init_app(app)
+manager = Manager(app)
+bootstrap = Bootstrap(app)
+db = SQLAlchemy(app)
 
-    bootstrap.init_app(app)
-    # mail.init_app(app)
-    # moment.init_app(app)
-    db.init_app(app)
-
-    from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
-
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint, url_prefix='/auth')
-
-    return app
-
+@app.route('/')
+def index():
+    return render_template('index.html')
