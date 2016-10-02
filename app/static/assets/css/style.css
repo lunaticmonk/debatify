@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
 /*resetting*/
 html,body{
 	margin:0;
@@ -8,9 +9,12 @@ html,body{
 	width : 100%;
 	color : #fff;
 }
+.logo p{
+	font-size: 30px;
+}
 
 body{
-	background: url('../img/background3.jpg');
+	background: url('../img/background4.jpg');
 	background-repeat: no-repeat center center fixed;
 	-moz-background-repeat: no-repeat center center fixed; 
 	background-size: cover;
@@ -33,7 +37,7 @@ body.backcolor{
 	height:100%;
 }
 header{
-	font-family: 'Architects Daughter',cursive;
+	font-family: 'Quicksand',cursive;
 }
 div.logo{
 	font-size: 2em;
@@ -51,6 +55,7 @@ div.logo p{
 }
 /*sign opt style*/
 .signopt button a{
+	display: block;
 	text-decoration: none;
 	color: #fff;
 }
@@ -60,6 +65,7 @@ div.logo p{
 	margin-left: 46%;
 }
 .signopt button{
+	font-weight: bold;
 	margin-right: 2%;
 	background-color: #0099ff;
 }	
@@ -71,6 +77,7 @@ div.logo p{
 }
 /*main part style*/
 .main{
+	font-family: 'Quicksand',sans-serif;
 	width: 80%;
 	/*border : 1px solid #fff;*/
 	margin-top: 10%;
@@ -84,7 +91,7 @@ div.logo p{
 	font-size: 4em;
 	font-weight: bolder;
 }
-.main p{font-family: 'Architects Daughter',cursive;
+.main p{font-family: 'Quicksand',cursive;
 font-size: 2em;}
 .main img{
 	margin-left : 1%;
@@ -151,4 +158,26 @@ font-size: 2em;}
 	cursor: pointer;
 	float: right;
 	color: #000;
+
+}
+/*Side nav styles*/
+
+.side-nav{
+	background-color: #fff;
+}
+.side-nav h2{
+	font-family: 'Quicksand',sans-serif;
+	color: #fff;
+}
+.userView{
+	background-color: #0099ff;
+}
+.side-nav li a:hover{
+	text-decoration: none;
+	color: #fff;
+}
+.side-nav li:hover{
+	background-color: #0099ff;
+	font-weight: bold;
+	color: #fff;
 }

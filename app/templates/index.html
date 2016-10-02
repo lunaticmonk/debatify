@@ -34,16 +34,13 @@
 		<!--main part-->
 
 	<ul id="slide-out" class="side-nav">
-	    <li><div class="userView">
-	      <!-- <img class="background" src="assets/img/ff.jpg" style = "width : 100%"> -->
-	      <!-- <a href="#!user"><img class="circle" src="images/yuna.jpg"></a> -->
-	      <a href="#!name"><span class="white-text name"></span></a>
-	      <a href="#!email"><span class="white-text email"></span></a>
-	    </div></li>
-	    <li><a href="#!">Home</a></li>
-	    <li><a href="#!">About</a></li>
-	    <li><a class="waves-effect" href="#!">Blog</a></li>
-	    <li><a href="#!">Contribute</a></li>
+	    <div class="userView">
+	    	<h2 class = "side-nav-head">Debatify</h2>
+	    </div>
+	    <li><a href="{{url_for('index')}}">Home</a></li>
+	    <li><a href="{{url_for('auth.about')}}">About</a></li>
+	    <li><a class="waves-effect" href = "{{url_for('auth.terms')}}">Terms</a></li>
+	    <li><a href="{{url_for('auth.privacy')}}">Privacy Policy</a></li>
 	    <!-- <li><div class="divider"></div></li>
 	    <li><a class="subheader">Subheader</a></li> -->
    	</ul>
@@ -51,13 +48,13 @@
 
 		<div class = "main">
 			<h3>Debate it out!</h3>
-			<h1>Because chage is necessary!</h1>
-			<p>Published by me! &bull; aka Sumedh</p>
+			<h1>Because you too can express!</h1>
+			<p></p>
 
-			<div class = "social">
+			{#<div class = "social">
 				<img src="{{url_for('static', filename = "assets/img/twitterbird2.png")}}">
 				<img src="{{url_for('static',filename = "assets/img/fb2.png")}}">
-			</div>
+			</div>#}
 		</div>
 
 		<!--end main part-->

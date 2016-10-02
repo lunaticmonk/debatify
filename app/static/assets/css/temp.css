@@ -1,0 +1,99 @@
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+.top{
+	background-color: #0099ff;
+	height: 70px;
+	box-shadow: 5px 2px 2px 2px #e3e3e3;
+
+}
+
+.brand{
+	font-family: 'Quicksand', sans-serif;
+	font-size: 40px;
+	margin-left: 2%;
+	color: white;
+	padding-top:1%;
+}
+.top a{
+	text-decoration: none;
+	color: #fff;
+}
+.terms{
+	position:absolute;
+	margin-left: 60%;
+	margin-top: -2.8%;
+	font-style: bold;
+	font-size: 20px;
+	color:white;
+}
+.privacy{
+	position:absolute;
+	margin-left: 67%;
+	margin-top: -2.8%;
+	font-style: bold;
+	font-size: 20px;
+	color:white;
+}
+.about{
+	position:absolute;
+	margin-left: 79%;
+	margin-top: -2.8%;
+	font-style: bold;
+	font-size: 20px;
+	color:white;
+}
+.Heading{
+	text-align: center;
+	font-size: 40px;
+	margin-top: 1.5%;
+}
+.policy,.Terms{
+	margin-bottom: 5%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.bottom{
+	margin-top: 5%;
+	height: 70px;
+	background-color: #0099ff;
+
+}
+.facebook,.twitter,.linkedin{
+	display: inline-block;
+	padding-top: 1%;
+}
+.facebook{
+	margin-left: 2%;
+}
+
+.copy{
+	text-align: center;
+	color:white;
+	margin-top: -3%;
+	font-family:'Quicksand', sans-serif;
+}	
+.about-content{
+	height: 70%;
+	width: 90%;
+	margin: auto;
+	margin-top: 10%;
+	text-align: center;
+}
+.about-content li{list-style: none; font-size: 1.5em;}
+.about-content h2,ul,p{
+	margin: auto;
+	font-family: 'Quicksand',sans-serif;
+	font-size: 3em;
+}
+.about-content > p{
+	font-size: 2em;
+	font-weight: bold;
+}
+.about-bottom{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin-top: 5%;
+	height: 10%;
+	background-color: #0099ff;
+}

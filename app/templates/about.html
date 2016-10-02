@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>About</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = "assets/css/temp.css")}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = "assets/css/reset.css")}}">
+</head>
+<body>
+<div class="top">
+	<div class="brand">
+		<p><a href = "{{url_for('auth.index')}}">Debatify</a></p>
+	</div>
+	<div class="terms">
+		<p><a href = "{{url_for('auth.terms')}}">Terms</a></p>
+	</div>
+	<div class="privacy">
+		<p><a href = "{{url_for('auth.privacy')}}">Privacy Policy</a></p>
+	</div>
+	<div class="about">
+		<p><a href = "{{url_for('auth.about')}}">About</a></p>
+	</div>
+</div>
+<div class="about-content">
+	<h2>Debatify - Because you too can express!</h2><br><br>
+	<ul>
+		<li>Have an opinion on burning issue - <b>Debatify</b> it!</li>
+		<li>Need opinion on an issue - <b>Debatify</b> it!</li>
+		<li>Don't know what this issue is? - <b>Debatify</b> it! </li>
+	</ul>
+	<br>
+	<br>
+	<br>
+	<p>Having debates is fun, Defatify makes it Incredible!</p>
+	</div>
+	<div class="about-bottom">
+	<div class="facebook">
+		<a href="https://www.facebook.com">
+		<img src="{{url_for('static', filename = "assets/img/facebook.png")}}"/>
+		</a>
+	</div>
+	<div class="twitter">
+		<a href="https://www.twitter.com">
+		<img src="{{url_for('static', filename = "assets/img/twitter.png")}}"/>
+		</a>
+	</div>
+	<div class="linkedin">
+		<a href="https://www.linkedin.com">
+		<img src="{{url_for('static', filename = "assets/img/linkedin.png")}}"/>
+		</a>
+	</div>
+	<div >
+		<p class="copy">&copy Copyright.All Rights Reserved.</p>
+	</div>
+	</div>
+</body>
+</html>

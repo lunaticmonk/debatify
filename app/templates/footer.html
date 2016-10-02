@@ -1,0 +1,50 @@
+<head>
+	<style>
+
+.bottom{
+	position: fixed;
+	bottom: 0;
+	height: 70px;
+	background-color: #0099ff;
+
+}
+.facebook,.twitter,.linkedin{
+	display: inline-block;
+	padding-top: 1%;
+}
+.facebook{
+	margin-left: 2%;
+}
+
+.copy{
+	text-align: center;
+	color:white;
+	margin-top: -3%;
+	font-family:'Quicksand', sans-serif;
+}	
+	</style>
+</head>
+{%block footer%}
+<div class="bottom">
+	<div class="facebook">
+		<a href="https://www.facebook.com">
+		<img src="{{url_for('static', filename = "assets/img/faccebook.png")}}"/>
+		</a>
+	</div>
+	<div class="twitter">
+		<a href="https://www.twitter.com">
+		<img src="{{url_for('static', filename = "assets/img/twitter.png")}}"/>
+		</a>
+	</div>
+	<div class="linkedin">
+		<a href="https://www.linkedin.com">
+		<img src="{{url_for('static', filename = "assets/img/linkedin.png")}}"/>
+		</a>
+	</div>
+	<div >
+		<p class="copy">&copy Copyright.All Rights Reserved.</p>
+	</div>
+</div>
+{%endblock%}
+
+
