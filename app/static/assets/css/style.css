@@ -10,7 +10,7 @@ html,body{
 }
 
 body{
-	background: url('../img/suits.jpg');
+	background: url('../img/background3.jpg');
 	background-repeat: no-repeat center center fixed;
 	-moz-background-repeat: no-repeat center center fixed; 
 	background-size: cover;
@@ -50,7 +50,9 @@ div.logo p{
 	vertical-align: middle;
 }
 /*sign opt style*/
-.signopt button{
+.signopt button a{
+	text-decoration: none;
+	color: #fff;
 }
 
 .signopt{
@@ -59,6 +61,7 @@ div.logo p{
 }
 .signopt button{
 	margin-right: 2%;
+	background-color: #0099ff;
 }	
 .signopt img{
 	display: inline-block;

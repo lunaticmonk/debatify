@@ -16,11 +16,11 @@
 			<header class = "navbar header">
 				<div class = "inlineheader">
 					<div class = "logo">
-						<p>Logo</p>
+						<p>Debatify</p>
 					</div>
 					<div class = "signopt">
-						<button class = "btn " id = "signinbtn">Sign in</button>
-						<button class = "btn" id = "signupbtn">Sign up</button>
+						<button class = "btn " id = "signinbtn"><a href = "{{url_for('auth.login')}}">Sign in</a></button>
+						<button class = "btn" id = "signupbtn"><a href = "{{url_for('auth.register')}}">Sign up</button>
 						<img src="{{url_for('static',filename = "assets/img/searchbtn.png")}}">
 						<a href="#" data-activates="slide-out" class="button-collapse" id ="sideNavbtn"><i class="material-icons">menu</i></a>
 					</div>
@@ -50,8 +50,8 @@
   
 
 		<div class = "main">
-			<h3>FEATURED ARTICLE</h3>
-			<h1>40 FREAKY,40 FANCY AND FUN PAINTED PORTRAITS</h1>
+			<h3>Debate it out!</h3>
+			<h1>Because chage is necessary!</h1>
 			<p>Published by me! &bull; aka Sumedh</p>
 
 			<div class = "social">
@@ -62,7 +62,7 @@
 
 		<!--end main part-->
 
-		<!--Login popup-->
+		{#<!--Login popup-->
 		<div id = "loginpanel">
 			<div id ="closebtn"><img src="{{url_for('static', filename = "assets/img/close.png")}}"></div>
 			<div>Email : <input type = "text" placeholder = "Email Address"></div>
@@ -100,10 +100,10 @@
 			      </div>
 			      <input class = "btn btn-primary" id = "form-submit" type = "submit" value = "Submit">
 			    </form>
-  </div>
+  			</div>
         </div>
 
-    <!--End of signup popup-->
+    <!--End of signup popup-->#}
 		<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<script src = "{{url_for('static', filename ="assets/materialize/js/materialize.min.js")}}"></script>
 		<script src = "{{url_for('static', filename = "assets/js/sideNav.js")}}"></script>
