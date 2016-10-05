@@ -75,12 +75,13 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
     <div class="login">
 	<h1>Register</h1>
-    <form method="post">
-      <input typr="text" name="first_name" placeholder="First Name" required="required">
-      <input typr="text" name="last_name" placeholder="Last Name" required="required">
-      <input typr="email" name="email" placeholder="Email" required="required">
-      <input typr="password" name="pwd" placeholder="Password" required="required">
-      <input typr="password" name="cnf_pwd" placeholder="Confirm your password" required="required">
+    <form method="post" action = '{{url_for('auth.process')}}'>
+      <input type="text" name="first_name" placeholder="First Name" required="required">
+      <input type="text" name="last_name" placeholder="Last Name" required="required">
+      <input type="email" name="email" placeholder="Email" required="required">
+      <input type = "text" name = "username" placeholder = "Username" required = "required">
+      <input type="password" name="pwd" placeholder="Password" required="required">
+      <input type="password" name="cnf_pwd" placeholder="Confirm your password" required="required">
     	<button type="submit" class="btn btn-primary btn-block btn-large">Register</button>
     </form>
 </div>

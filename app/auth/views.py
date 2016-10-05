@@ -1,5 +1,6 @@
-from flask import Blueprint,render_template
-
+from flask import Blueprint,render_template,request
+from app import models
+from app import db
 admin = Blueprint('auth',__name__)
 
 @admin.route('/')
@@ -26,3 +27,17 @@ def privacy():
 def about():
 	return render_template('about.html')
 
+@admin.route('/process', methods = ['GET','POST'])
+def process():
+	first_name = request.form['first_name']
+	last_name = request.form['last_name']
+	email = request.form['email']
+	username = request.form['username']
+	password = request.form['pwd']
+	cnf_password = request.form['cnf_pwd']
+
+	newUser = models.User(firstname = first_name, lastname = last_name, email = email, password = password, username = username)
+	db.session.add(newUser)
+	db.session.commit()
+
+	return render_template('me.html', name = first_name)
