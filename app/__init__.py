@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 # app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 #app = create_app('DEVELOPMENT')
 
-login_manager = LoginManager()
+login_manager = LoginManager(app)
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.process'
 
