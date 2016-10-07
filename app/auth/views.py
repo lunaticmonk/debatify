@@ -1,7 +1,8 @@
-from flask import Blueprint,render_template,request
+from flask import Blueprint,render_template,request,flash
+from flask.ext.login import login_required,login_user
 from app import models
 from app import db
-admin = Blueprint('auth',__name__)
+admin = Blueprint('auth',__name__, template_folder = "templates")
 
 @admin.route('/')
 def index():
@@ -40,4 +41,21 @@ def process():
 	db.session.add(newUser)
 	db.session.commit()
 
-	return render_template('me.html', name = first_name)
+	#return render_template('me.html', name = first_name)
+	return "<p>You are registered successfully.Please login to continue</p>"
+
+@admin.route('/me',methods = ['GET','POST'])
+def loginprocess():
+	user = models.User.query.filter_by(email = request.form['Email']).first()
+	password = request.form['Password']
+	if user is not None and user.verify_password(password):
+		#login_user(user,request.form['Password'].remember_me)
+		return render_template('me.html', name = user.firstname)
+	#flash('Invalid login')
+	return render_template('login.html')
+
+
+@admin.route('/secret')
+@login_required
+def secret():
+	return 'Only authenticated Users allowed'

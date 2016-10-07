@@ -19,8 +19,8 @@
 						<p>Debatify</p>
 					</div>
 					<div class = "signopt">
-						<button class = "btn " id = "signinbtn">Sign in</button>
-						<button class = "btn" id = "signupbtn">Sign up</button>
+						<button class = "btn " id = "signinbtn"><a href = "{{url_for('auth.login')}}">Sign in</a></button>
+						<button class = "btn" id = "signupbtn"><a href = "{{url_for('auth.register')}}">Sign up</button>
 						<img src="{{url_for('static',filename = "assets/img/searchbtn.png")}}">
 						<a href="#" data-activates="slide-out" class="button-collapse" id ="sideNavbtn"><i class="material-icons">menu</i></a>
 					</div>
@@ -34,35 +34,32 @@
 		<!--main part-->
 
 	<ul id="slide-out" class="side-nav">
-	    <li><div class="userView">
-	      <!-- <img class="background" src="assets/img/ff.jpg" style = "width : 100%"> -->
-	      <!-- <a href="#!user"><img class="circle" src="images/yuna.jpg"></a> -->
-	      <a href="#!name"><span class="white-text name"></span></a>
-	      <a href="#!email"><span class="white-text email"></span></a>
-	    </div></li>
-	    <li><a href="#!">Home</a></li>
-	    <li><a href="#!">About</a></li>
-	    <li><a class="waves-effect" href="#!">Blog</a></li>
-	    <li><a href="#!">Contribute</a></li>
+	    <div class="userView">
+	    	<h2 class = "side-nav-head">Debatify</h2>
+	    </div>
+	    <li><a href="{{url_for('index')}}">Home</a></li>
+	    <li><a href="{{url_for('auth.about')}}">About</a></li>
+	    <li><a class="waves-effect" href = "{{url_for('auth.terms')}}">Terms</a></li>
+	    <li><a href="{{url_for('auth.privacy')}}">Privacy Policy</a></li>
 	    <!-- <li><div class="divider"></div></li>
 	    <li><a class="subheader">Subheader</a></li> -->
    	</ul>
   
 
 		<div class = "main">
-			<h3>FEATURED ARTICLE</h3>
-			<h1>40 FREAKY,40 FANCY AND FUN PAINTED PORTRAITS</h1>
-			<p>Published by me! &bull; aka Sumedh</p>
+			<h3>Debate it out!</h3>
+			<h1>Because you too can express!</h1>
+			<p></p>
 
-			<div class = "social">
+			{#<div class = "social">
 				<img src="{{url_for('static', filename = "assets/img/twitterbird2.png")}}">
 				<img src="{{url_for('static',filename = "assets/img/fb2.png")}}">
-			</div>
+			</div>#}
 		</div>
 
 		<!--end main part-->
 
-		<!--Login popup-->
+		{#<!--Login popup-->
 		<div id = "loginpanel">
 			<div id ="closebtn"><img src="{{url_for('static', filename = "assets/img/close.png")}}"></div>
 			<div>Email : <input type = "text" placeholder = "Email Address"></div>
@@ -100,10 +97,10 @@
 			      </div>
 			      <input class = "btn btn-primary" id = "form-submit" type = "submit" value = "Submit">
 			    </form>
-  </div>
+  			</div>
         </div>
 
-    <!--End of signup popup-->
+    <!--End of signup popup-->#}
 		<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<script src = "{{url_for('static', filename ="assets/materialize/js/materialize.min.js")}}"></script>
 		<script src = "{{url_for('static', filename = "assets/js/sideNav.js")}}"></script>

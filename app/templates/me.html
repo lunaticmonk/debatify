@@ -12,6 +12,15 @@
                     <div class = "jumbotron">Hello, {{ name }}</div>
                 </div>
             </div>
+            {#
+            <ul>{% if current_user.is_authenticated() %}
+                <li><a href="{{url_for('auth.register')}}">Logout</a></li>
+                {% else %}
+                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                {% endif %}
+            </ul>
+            #}
+            <button><a href="{{url_for('auth.login')}}">Sign out</a></button>
         {% endblock%}
     </body>
 </html>
