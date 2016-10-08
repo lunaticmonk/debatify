@@ -2,11 +2,14 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/materialize/css/materialize.min.css")}}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <style type="text/css">
-            .col {
-                margin-right: .5%;
-                background-color: #0099ff;
-            }
+        .navbar-wrapper{
+            background-color: #0099ff;
+        }
+        #grids div{
+            margin-left: 1%;
+        }
         </style>
     </head>
 
@@ -17,8 +20,8 @@
             </div>
             <button class = "btn btn-default"><a href="{{ url_for('auth.login') }}">Logout</a></button>
         </div>#}
-        <div class = "navbar-fixed">
             <!-- Dropdown Structure -->
+        <div class = "navbar-fixed">
             <ul id="dropdown1" class="dropdown-content">
               <li><a href="#!">one</a></li>
               <li><a href="#!">two</a></li>
@@ -26,10 +29,10 @@
               <li><a href="#!">three</a></li>
             </ul>
             <nav>
-                <div class = "nav-wrapper">
+                <div class = "nav-wrapper light-blue darken-2">
                     <a href="#" class="brand-logo">Logo</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="#!">Raise a question</a></li>
+                        <li><a href="#modal1" class = "waves-effect waves-light btn modal-trigger">Raise a question</a></li>
                         <li><a href="#!">Poll</a></li>
                         <!--Dropdown trigger-->
                         <li><a href="#!" class = "dropdown-button" data-activates = "dropdown1">Account<i class="material-icons right">&bull;</i></a></li>
@@ -38,11 +41,36 @@
             </nav>
         </div>
         <!--Navbar end-->
-        <div class = "row">
-            <div class = "col s3">This is s3</div>
-            <div class = "col s5">This is s6</div>
-            <div class = "col s3">This is s3</div>
-        </div>
+        <!--Grids-->
+        <ul class="collapsible popout" data-collapsible="accordion" id = "accordion">
+            <!--The dynamic list part comes here-->
+        </ul>
+        <!--Grids end-->
+        <!--Modal-->
+<!--           <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+ -->        <!-- Modal Structure -->
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+              <div class="row">
+                <form class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="textarea1" class="materialize-textarea"></textarea>
+                      <label for="textarea1">Question</label>
+                    </div>
+                    <div class = "col s12">
+                      <label for="topic">Topic</label>
+                      <textarea id="topic" class="materialize-textarea"></textarea>
+                    </div>
+                  </div>
+                </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button class=" modal-action modal-close waves-effect waves-green btn-flat" id = "raisebtn">Raise</button>
+            </div>
+          </div>
+        <!--Modal end-->
 
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src = "{{url_for('static',filename = "assets/materialize/js/materialize.min.js")}}"></script>
