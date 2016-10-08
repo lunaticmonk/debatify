@@ -29,9 +29,10 @@
 		<!-- nav end-->
 		<div class="parallax-container">
 			<div class="parallax">
-				<img src="{{url_for('static',filename = "assets/img/background4.jpg")}}">
+				<img src="https://hd.unsplash.com/photo-1429081172764-c0ee67ab9afd">
 			</div>
 	 </div>
+
 		<!-- footer start here-->
 			<footer class="page-footer light-blue darken-3 z-depth-3">
           <div class="container">
@@ -61,9 +62,9 @@
         </footer>
 
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-				<script src="{{url_for('static',filename="assets/materialize/js/materialize.js")}}"></script>
-				<script src = "{{url_for('static',filename = "assets/js/index.js")}}"></script>
-
+				<script src="{{url_for('static',filename="assets/materialize/js/materialize.js")}}">
+				<script src = "{{url_for('static',filename = "assets/js/index.js")}}"
+				</script>
 
 				</div>
 				</body>
