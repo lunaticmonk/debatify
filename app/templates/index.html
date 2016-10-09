@@ -8,7 +8,11 @@
 		<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/css/bootstrap.min.css")}}">
 		<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/materialize/css/materialize.css")}}">
 		<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/css/style.css")}}">
-
+		<style>
+			#logo1 {
+				margin-left: 20px;
+			}
+		</style>
 	</head>
 	<!--body starts -->
 	<body>
@@ -17,9 +21,8 @@
 			<div class="nev-menu">
 			<nav>
 			<div class="nav-wrapper light-blue darken-3 z-depth-3">
-					<a href="#" class="brand-logo">Debatify</a>
+					<a href="#" class="brand-logo" id="logo1">Debatify</a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
-						<li><a href="sass.html">Search</a></li>
 						<li><a href="{{url_for('auth.login')}}">Login</a></li>
 						<li><a href="{{url_for('auth.register')}}">Sign Up</a></li>
 					</ul>
