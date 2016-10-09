@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 #from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask.ext.login import UserMixin
+from flask.ext.login import UserMixin,AnonymousUserMixin
 from app import login_manager
 from app import db
 
@@ -16,6 +16,9 @@ class User(UserMixin,db.Model):
 	confirmed = db.Column(db.Boolean, default = False)
 	question = db.relationship("Question", backref = "owner", lazy = 'dynamic')
 
+	def __init__(self,id):
+		self.id = id
+		
 	def __repr__(self):
 		return "<User %s>" % self.firstname
 
@@ -31,6 +34,23 @@ class User(UserMixin,db.Model):
 	#Verification of password n database
 	def verify_password(self, password):
 		return check_password_hash(self.password_hash, password)
+
+	def is_authenticated(self):
+		return self.authenticated
+
+	def get_id(self):
+		return self.email
+
+	def is_active(self):
+		return True
+
+	def is_anonymous(self):
+		return False
+
+@login_manager.user_loader
+def load_user(user_id):
+	return User.query.get((user_id))
+
 
 	# def generate_confirmation_token(self, expiration = 120):
 	# 	s = Serializer(app.config['SERIAL_KEY'],expiration)
@@ -48,9 +68,6 @@ class User(UserMixin,db.Model):
 	# 	db.session.add(self)
 	# 	return True
 
-@login_manager.user_loader
-def load_user(user_id):
-	return User.query.get(int(user_id))
 
 
 # Another table containing questions of users
@@ -58,5 +75,8 @@ def load_user(user_id):
 class Question(db.Model):
 	__tablename__ = "questions"
 	id = db.Column(db.Integer, primary_key = True)
+	topic = db.Column(db.String(500))
 	questions = db.Column(db.String(500))
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+	

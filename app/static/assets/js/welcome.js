@@ -10,6 +10,7 @@
 })();
 
 function grab(){
+		//alert('hello');
 		var question = document.querySelector('#textarea1').value;
 		var topic = document.querySelector('#topic').value;
 		var div1 = document.createElement('div');
@@ -34,7 +35,25 @@ function grab(){
 		var raisebtn = document.querySelector('#raisebtn');
 		raisebtn.addEventListener('click',function(){
 			var newNode = grab();
+			//sendNode();
 			var accordion = document.querySelector('#accordion');
 			accordion.appendChild(newNode);
 		});
 	}
+
+	// function sendNode(){
+	// 	var xhttp = new XMLHttpRequest();
+	// 	var url = "{{url_for('auth.index')}}"
+	// 	var question = document.querySelector('#textarea1').value;
+	// 	var topic = document.querySelector('#topic').value;
+	// 	var params = ('TOPIC = topic&QUESTION = question')
+	// 	console.log(params);
+	// 	xhttp.open('POST',url,true);
+	// 	console.log('hello');
+	// 	xhttp.onreadystatechange = function() {//Call a function when the state changes.
+ //    		if(xhttp.readyState == 4 && xhttp.status == 200) {
+ //        	console.log(xhttp.responseText);
+ //    		}
+	// 	}
+	// 	xhttp.send(params);
+	// }

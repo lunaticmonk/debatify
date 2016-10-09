@@ -1,5 +1,5 @@
-from flask import Blueprint,render_template,request,flash
-from flask.ext.login import login_required,login_user,logout_user
+from flask import Blueprint,render_template,request,flash,g
+from flask.ext.login import login_required,login_user,logout_user,current_user
 from app import models,login_manager
 from app import db
 admin = Blueprint('auth',__name__, template_folder = "templates")
@@ -46,13 +46,19 @@ def process():
 		#return render_template('me.html', name = first_name)
 		return "<p>You are registered successfully.Please login to continue</p>"
 
+
 @admin.route('/me',methods = ['GET','POST'])
 def loginprocess():
 	user = models.User.query.filter_by(email = request.form['Email']).first()
 	password = request.form['Password']
 	if user is not None and user.verify_password(password):
-		#login_user(user,request.form['Password'].remember_me)
-		return render_template('me.html', name = user.firstname)
+		#user_id = user.query.filter_by(password = password).first()
+		#g.user = user
+		user.authenticated = True
+		user = current_user
+		login_user(user)
+		issues = models.Question.query.filter_by(current_user.id).all()
+		return render_template('me.html', name = user.firstname, issues = issues)
 	else:
 		#flash('Invalid login')
 		return render_template('login.html')
@@ -64,6 +70,18 @@ def loginprocess():
 # 	flash('You have been logged out.')
 # 	return redirect(url_for('auth.login'))
 
+# @admin.route('/welcome', methods = ['GET','POST'])
+# def welcome():
+# 	fetchedTopic = request.form['topic-textarea']
+# 	fetchedQuestion = request.form['question-textarea']
+# 	# user = g.user
+# 	#return user.firstname
+# 	topicandquestion = models.Question(topic = fetchedTopic,questions = fetchedQuestion, owner = models.load_user())
+# 	db.session.add(topicandquestion)
+# 	db.session.commit()
+# 	#return '<p>hello</p>'
+# 	return render_template('listitems.html', topic = fetchedTopic)
+# 	#return "<p>hello</p>"
 
 @admin.route('/secret')
 @login_required
