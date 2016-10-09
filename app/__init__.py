@@ -31,3 +31,6 @@ def index():
 
 from app.auth.views import admin
 app.register_blueprint(auth.views.admin,url_prefix = '/authentication')
+
+from app.main.views import welcome
+app.register_blueprint(main.views.welcome,url_prefix = '/welcome')

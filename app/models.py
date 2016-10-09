@@ -14,6 +14,7 @@ class User(UserMixin,db.Model):
 	password = db.Column(db.String(100),nullable = True)
 	password_hash = db.Column(db.String(128), nullable = True)
 	confirmed = db.Column(db.Boolean, default = False)
+	question = db.relationship("Question", backref = "owner", lazy = 'dynamic')
 
 	def __repr__(self):
 		return "<User %s>" % self.firstname
@@ -50,3 +51,12 @@ class User(UserMixin,db.Model):
 @login_manager.user_loader
 def load_user(user_id):
 	return User.query.get(int(user_id))
+
+
+# Another table containing questions of users
+
+class Question(db.Model):
+	__tablename__ = "questions"
+	id = db.Column(db.Integer, primary_key = True)
+	questions = db.Column(db.String(500))
+	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
