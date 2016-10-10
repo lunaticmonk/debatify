@@ -1,7 +1,10 @@
-from flask import Blueprint,render_template,request,flash
-from flask.ext.login import login_required,login_user,logout_user
+from flask import Blueprint,render_template,request,flash,redirect,url_for,session,g
+from flask_login import login_required,login_user,logout_user
 from app import models,login_manager
 from app import db
+
+#app.config['DEBATIFY_ADMIN']=<'somunimkarde@gmail.com'>
+
 admin = Blueprint('auth',__name__, template_folder = "templates")
 
 @admin.route('/')
@@ -40,32 +43,35 @@ def process():
 		return '<p>Already registered with this email.Please login to continue.</p>'
 	else:
 		newUser = models.User(firstname = first_name, lastname = last_name, email = email, password = password, username = username)
+		session['known'] = False
 		db.session.add(newUser)
 		db.session.commit()
+		# if app.config['DEBATIFY_ADMIN']:
+		# 	send_email(app.config['DEBATIFY_ADMIN'],'New User','mail/new_user',user = newUser)
 
 		#return render_template('me.html', name = first_name)
 		return "<p>You are registered successfully.Please login to continue</p>"
 
 @admin.route('/me',methods = ['GET','POST'])
 def loginprocess():
-	user = models.User.query.filter_by(email = request.form['Email']).first()
+	g.user = models.User.query.filter_by(email = request.form['Email']).first()
 	password = request.form['Password']
-	if user is not None and user.verify_password(password):
-		#login_user(user,request.form['Password'].remember_me)
-		return render_template('me.html', name = user.firstname)
+	if g.user is not None and g.user.verify_password(password):
+		login_user(g.user)
+		return render_template('me.html', firstname = g.user.firstname)
 	else:
-		#flash('Invalid login')
+		flash('Invalid login')
 		return render_template('login.html')
 
-# @admin.route('/logout')
-# @login_required
-# def logout():
-# 	logout_user()
-# 	flash('You have been logged out.')
-# 	return redirect(url_for('auth.login'))
-
-
-@admin.route('/secret')
+@admin.route('/logout')
 @login_required
-def secret():
-	return 'Only authenticated Users allowed'
+def logout():
+	logout_user()
+	flash('You have been logged out.')
+	return redirect(url_for('auth.login'))
+
+
+# @admin.route('/secret')
+# @login_required
+# def secret():
+# 	return 'Only authenticated Users allowed'

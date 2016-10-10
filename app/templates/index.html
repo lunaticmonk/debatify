@@ -47,6 +47,11 @@
   
 
 		<div class = "main">
+			{#{% if current_user.is_authenticated %}
+				<h3>Hello, {{ firstname }}</h3>
+			{% else %}
+				<h3>Hello, Stranger</h3>
+			{% endif %}#}
 			<h3>Debate it out!</h3>
 			<h1>Because you too can express!</h1>
 			{#<div class = "social">

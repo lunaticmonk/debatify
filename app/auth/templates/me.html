@@ -14,24 +14,21 @@
     </head>
 
     <body>
-        {#<div class = "container">
-            <div class = "jumbotron">
-                <p>Hello, {{ name }}</p>
-            </div>
-            <button class = "btn btn-default"><a href="{{ url_for('auth.login') }}">Logout</a></button>
-        </div>#}
+        <div class = "container">
+        </div>
             <!-- Dropdown Structure -->
         <div class = "navbar-fixed">
             <ul id="dropdown1" class="dropdown-content">
-              <li><a href="#!">one</a></li>
-              <li><a href="#!">two</a></li>
+              <li><a href="#!">Profile</a></li>
+              <li><a href="#!">IDK</a></li>
               <li class="divider"></li>
-              <li><a href="#!">three</a></li>
+              <li><a href="{{url_for('auth.logout')}}">Logout</a></li>
             </ul>
             <nav>
                 <div class = "nav-wrapper light-blue darken-2">
-                    <a href="#" class="brand-logo">Logo</a>
+                    <a href="{{url_for('index')}}" class="brand-logo">Debatify</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li>Hello, {{ firstname }}</li>
                         <li><a href="#modal1" class = "waves-effect waves-light btn modal-trigger">Raise a question</a></li>
                         <li><a href="#!">Poll</a></li>
                         <!--Dropdown trigger-->
@@ -52,22 +49,22 @@
           <div id="modal1" class="modal">
             <div class="modal-content">
               <div class="row">
-                <form class="col s12">
+                <form class="col s12" action = "{{url_for('main.index')}}" method = "POST">
                   <div class="row">
                     <div class="input-field col s12">
-                      <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <textarea id="textarea1" class="materialize-textarea" name = "question-textarea"></textarea>
                       <label for="textarea1">Question</label>
                     </div>
                     <div class = "col s12">
                       <label for="topic">Topic</label>
-                      <textarea id="topic" class="materialize-textarea"></textarea>
+                      <textarea id="topic" class="materialize-textarea" name = "topic-textarea"></textarea>
                     </div>
                   </div>
+            <div class="modal-footer">
+              <button class=" modal-action modal-close waves-effect waves-green btn-flat" id = "raisebtn" onsubmit = "submit">Raise</button>
+            </div>
                 </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-              <button class=" modal-action modal-close waves-effect waves-green btn-flat" id = "raisebtn">Raise</button>
             </div>
           </div>
         <!--Modal end-->

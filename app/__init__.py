@@ -1,17 +1,30 @@
 import os
 from flask import Flask,render_template,url_for,request,session,redirect
-from flask.ext.login import LoginManager
+from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_script import Manager,Shell
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql6138801:Nefp9ZvUCA@sql6.freemysqlhosting.net/sql6138801'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'hard to guess string'
 
-manager = Manager(app)
-bootstrap = Bootstrap(app)
-db = SQLAlchemy(app)
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+
+manager = Manager()
+bootstrap = Bootstrap()
+db = SQLAlchemy()
+mail = Mail(app)
+
+login_manager = LoginManager()
+login_manager.session_protection = 'strong'
+login_manager.login_view = 'auth.login'
 # basedir = os.path.abspath(os.path.dirname(__file__))
 # app.config['SECRET_KEY'] = 'hard to guess string'
 # app.config['SQLALCHEMY_DATABASE_URI'] =\
@@ -19,9 +32,9 @@ db = SQLAlchemy(app)
 # app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 #app = create_app('DEVELOPMENT')
 
-login_manager = LoginManager(app)
-login_manager.session_protection = 'strong'
-login_manager.login_view = 'auth.process'
+bootstrap.init_app(app)
+db.init_app(app)
+login_manager.init_app(app)
 
 from app import models
 

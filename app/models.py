@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 #from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask.ext.login import UserMixin
+from flask_login import UserMixin
 from app import login_manager
 from app import db
 
@@ -18,6 +18,8 @@ class User(UserMixin,db.Model):
 
 	def __repr__(self):
 		return "<User %s>" % self.firstname
+
+	#Related to werkzeug security
 
 	@property
 	def password(self):
@@ -59,4 +61,5 @@ class Question(db.Model):
 	__tablename__ = "questions"
 	id = db.Column(db.Integer, primary_key = True)
 	questions = db.Column(db.String(500))
+	topic = db.Column(db.String(500))
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
