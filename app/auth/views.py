@@ -1,8 +1,11 @@
-from flask import Blueprint,render_template,request,flash
+from flask import render_template,request,flash,current_app
+from . import auth
 from flask.ext.login import login_required,login_user,logout_user
-from app import models,login_manager
-from app import db
-admin = Blueprint('auth',__name__, template_folder = "templates")
+from .. import models
+from .. import app
+from .. import db
+#admin = Blueprint('auth',__name__, template_folder = "templates")
+
 
 @admin.route('/')
 def index():

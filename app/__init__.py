@@ -1,36 +1,38 @@
 import os
-from flask import Flask,render_template,url_for,request,session,redirect
+from flask import Flask,render_template
 from flask.ext.login import LoginManager
 from flask_bootstrap import Bootstrap
 from flask_script import Manager,Shell
 from flask_sqlalchemy import SQLAlchemy
+from flask.ext.login import LoginManager
+from config import config
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql6138801:Nefp9ZvUCA@sql6.freemysqlhosting.net/sql6138801'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-manager = Manager(app)
-bootstrap = Bootstrap(app)
-db = SQLAlchemy(app)
-# basedir = os.path.abspath(os.path.dirname(__file__))
-# app.config['SECRET_KEY'] = 'hard to guess string'
-# app.config['SQLALCHEMY_DATABASE_URI'] =\
-#     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-# app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-#app = create_app('DEVELOPMENT')
-
-login_manager = LoginManager(app)
+login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.process'
+manager = Manager()
+bootstrap = Bootstrap()
+db = SQLAlchemy()
 
-from app import models
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+def create_app(config_name):
+	app = Flask(__name__)
+	app.config.from_object(config[config_name])
+	bootstrap.init_app(app)
+	db.init_app(app)
+	login_manager.init_app(app)
 
-from app.auth.views import admin
-app.register_blueprint(auth.views.admin,url_prefix = '/authentication')
+	from app.auth.views import admin
+	app.register_blueprint(auth.views.admin,url_prefix = '/authentication')
 
-from app.main.views import welcome
-app.register_blueprint(main.views.welcome,url_prefix = '/welcome')
+	from app.main.views import welcome
+	app.register_blueprint(main.views.welcome,url_prefix = '/welcome')
+
+
+	@app.route('/')
+	def index():
+		return render_template('index.html')
+
+	return app
+
