@@ -75,7 +75,6 @@ def logout():
 	flash('You have been logged out.')
 	return redirect(url_for('auth.login'))
 
-
 # @admin.route('/secret')
 # @login_required
 # def secret():
