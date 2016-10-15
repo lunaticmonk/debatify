@@ -1,5 +1,5 @@
 from flask import Blueprint,render_template,request,flash,redirect,url_for,session,g
-from flask_login import login_required,login_user,logout_user
+from flask_login import login_required,login_user,logout_user,current_user
 from app import models,login_manager
 from app import db
 
@@ -41,16 +41,19 @@ def process():
 	cnf_password = request.form['cnf_pwd']
 	if(models.User.query.filter_by(email = email).first()):
 		return '<p>Already registered with this email.Please login to continue.</p>'
-	else:
-		newUser = models.User(firstname = first_name, lastname = last_name, email = email, password = password, username = username)
-		session['known'] = False
-		db.session.add(newUser)
-		db.session.commit()
-		# if app.config['DEBATIFY_ADMIN']:
-		# 	send_email(app.config['DEBATIFY_ADMIN'],'New User','mail/new_user',user = newUser)
+	#else:
+		#if( password == cnf_password ):
+	newUser = models.User(firstname = first_name, lastname = last_name, email = email, password = password, username = username)
+	#session['known'] = False
+	db.session.add(newUser)
+	db.session.commit()
+	# if app.config['DEBATIFY_ADMIN']:
+	# 	send_email(app.config['DEBATIFY_ADMIN'],'New User','mail/new_user',user = newUser)
 
-		#return render_template('me.html', name = first_name)
-		return "<p>You are registered successfully.Please login to continue</p>"
+	#return render_template('me.html', name = first_name)
+	return "<p>You are registered successfully.Please login to continue</p>"
+		#else:
+			#return '<p>Password didnt match</p>'
 
 @admin.route('/me',methods = ['GET','POST'])
 def loginprocess():
@@ -58,7 +61,9 @@ def loginprocess():
 	password = request.form['Password']
 	if g.user is not None and g.user.verify_password(password):
 		login_user(g.user)
-		return render_template('me.html', firstname = g.user.firstname)
+		#user_id = models.Question.query.filter_by(current_user).all()
+		fetchedTopic = models.Question.query.filter_by(user_id = g.user.id).all()
+		return render_template('me.html', firstname = g.user.firstname,fetchedTopic = fetchedTopic)
 	else:
 		flash('Invalid login')
 		return render_template('login.html')

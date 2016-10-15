@@ -41,6 +41,12 @@
         <!--Grids-->
         <ul class="collapsible popout" data-collapsible="accordion" id = "accordion">
             <!--The dynamic list part comes here-->
+                {% for f in fetchedTopic %}
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{f.topic}}</div>
+                    <div class="collapsible-body"><p>{{f.questions}}</p></div>
+                </li>
+                {% endfor %}
         </ul>
         <!--Grids end-->
         <!--Modal-->
@@ -53,10 +59,10 @@
                   <div class="row">
                     <div class="input-field col s12">
                         <textarea id="textarea1" class="materialize-textarea" name = "question-textarea"></textarea>
-                      <label for="textarea1">Question</label>
+                      <label for="textarea1">Topic</label>
                     </div>
                     <div class = "col s12">
-                      <label for="topic">Topic</label>
+                      <label for="topic">Question</label>
                       <textarea id="topic" class="materialize-textarea" name = "topic-textarea"></textarea>
                     </div>
                   </div>

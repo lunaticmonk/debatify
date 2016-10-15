@@ -34,6 +34,20 @@ class User(UserMixin,db.Model):
 	def verify_password(self, password):
 		return check_password_hash(self.password_hash, password)
 
+@login_manager.user_loader
+def load_user(user_id):
+	return User.query.get(int(user_id))
+
+
+# Another table containing questions of users
+
+class Question(db.Model):
+	__tablename__ = "questions"
+	id = db.Column(db.Integer, primary_key = True)
+	questions = db.Column(db.String(500))
+	topic = db.Column(db.String(500))
+	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
 	# def generate_confirmation_token(self, expiration = 120):
 	# 	s = Serializer(app.config['SERIAL_KEY'],expiration)
 	# 	return s.dumps({'confirm' : self.id})
@@ -49,17 +63,3 @@ class User(UserMixin,db.Model):
 	# 	self.confirmed = True
 	# 	db.session.add(self)
 	# 	return True
-
-@login_manager.user_loader
-def load_user(user_id):
-	return User.query.get(int(user_id))
-
-
-# Another table containing questions of users
-
-class Question(db.Model):
-	__tablename__ = "questions"
-	id = db.Column(db.Integer, primary_key = True)
-	questions = db.Column(db.String(500))
-	topic = db.Column(db.String(500))
-	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

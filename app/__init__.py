@@ -7,7 +7,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql6138801:Nefp9ZvUCA@sql6.freemysqlhosting.net/sql6138801'
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] =\
+     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql6140009:Y1912zwYwC@sql6.freemysqlhosting.net/sql6140009'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'hard to guess string'
 
@@ -19,21 +22,18 @@ app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 
 manager = Manager()
 bootstrap = Bootstrap()
-db = SQLAlchemy()
+db = SQLAlchemy(app)
 mail = Mail(app)
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
-# basedir = os.path.abspath(os.path.dirname(__file__))
 # app.config['SECRET_KEY'] = 'hard to guess string'
-# app.config['SQLALCHEMY_DATABASE_URI'] =\
-#     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 # app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 #app = create_app('DEVELOPMENT')
 
 bootstrap.init_app(app)
-db.init_app(app)
+#db.init_app(app)
 login_manager.init_app(app)
 
 from app import models
