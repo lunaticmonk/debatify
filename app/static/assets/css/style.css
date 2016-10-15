@@ -13,171 +13,28 @@ html,body{
 	font-size: 30px;
 }
 
-body{
-	background: url('../img/background4.jpg');
-	background-repeat: no-repeat center center fixed;
-	-moz-background-repeat: no-repeat center center fixed; 
-	background-size: cover;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-}
 
-body.backcolor{
-	background-color: #13A4CF; 
-	position: fixed;
-	top: 0;
-	width:100%;
-	height:10%; 
-	box-shadow: 1px 1px 10px 2px;
-}
-
-/*header styling*/
-.inlineheader,header{
-	height:100%;
-}
-header{
-	font-family: 'Quicksand',cursive;
-}
-div.logo{
-	font-size: 2em;
-	text-align: center;
-	margin: .30% 2%;
-	/*border: 1px solid white;*/
-	width:20%;
-	height: 90%;
-	line-height: 220%;
-	display: inline-block;
-}
-
-div.logo p{
-	vertical-align: middle;
-}
-/*sign opt style*/
-.signopt button a{
-	display: block;
-	text-decoration: none;
-	color: #fff;
-}
-
-.signopt{
-	display: inline-block;
-	margin-left: 46%;
-}
-.signopt button{
-	font-weight: bold;
-	margin-right: 2%;
-	background-color: #0099ff;
-}	
-.signopt img{
-	display: inline-block;
-	width : 12%;
-	height : auto;
-	cursor : pointer;
-}
-/*main part style*/
 .main{
 	font-family: 'Quicksand',sans-serif;
-	width: 80%;
-	/*border : 1px solid #fff;*/
-	margin-top: 10%;
-	margin-left: 2%;
+	margin-top: 1%;
 }
-.main h3{
-	color: #13A4CF;
-	font-weight: bolder;
-}
-.main h1{
-	font-size: 4em;
-	font-weight: bolder;
-}
+
 .main p{font-family: 'Quicksand',cursive;
 font-size: 2em;}
 .main img{
 	margin-left : 1%;
 	width : 3%;
 }
-#sideNavbtn{
+
+footer {
 	position: absolute;
-	right : 2%;
-	top: 35%;
+	left:0;
+	right: 0;
+	bottom: 0;
 }
+
 .social img{
 	display: inline-block;
 	cursor: pointer;
 }
-/*login panel style*/
-
-#loginpanel{
-	font-family: 'Architects Daughter';
-	color: #000;
-	font-size: 2em;
-	position:absolute;
-	top: 25%;
-	left: 32%;
-	background-color: #fff;
-	width:40%;
-	margin: auto auto;
-	border-radius: 2%;
-	box-shadow: 5% 5% 5% 5%;
-}
-#loginpanel div{
-	padding:2%;
-}
-#closebtn img{
-	width:6%;
-	height:auto;
-	display: block;
-	cursor: pointer;
-	position: absolute;
-	right: 5%;
-	top:10%;
-	color: #000;
-}
-#loginbtn,#form-submit{
-	margin: 2% 40%;
-}
-
-#signup{
-	font-family: 'Architects Daughter';
-	color: #000;
-	font-size: 2em;
-	position:absolute;
-	top: 25%;
-	left: 32%;
-	background-color: #fff;
-	width:40%;
-	margin: 2% auto;
-	border-radius: 2%;
-	box-shadow: 5% 5% 5% 5%;
-}
-#closesignup img{
-	width:6%;
-	height:auto;
-	display: block;
-	cursor: pointer;
-	float: right;
-	color: #000;
-
-}
-/*Side nav styles*/
-
-.side-nav{
-	background-color: #fff;
-}
-.side-nav h2{
-	font-family: 'Quicksand',sans-serif;
-	color: #fff;
-}
-.userView{
-	background-color: #0099ff;
-}
-.side-nav li a:hover{
-	text-decoration: none;
-	color: #fff;
-}
-.side-nav li:hover{
-	background-color: #0099ff;
-	font-weight: bold;
-	color: #fff;
-}
+/*login panel style*
