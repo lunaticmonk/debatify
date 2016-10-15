@@ -13,15 +13,19 @@ manager = Manager(app)
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 # basedir = os.path.abspath(os.path.dirname(__file__))
-# app.config['SECRET_KEY'] = 'hard to guess string'
+app.config['SECRET_KEY'] = 'hard to guess string'
 # app.config['SQLALCHEMY_DATABASE_URI'] =\
 #     'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 # app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 #app = create_app('DEVELOPMENT')
 
-login_manager = LoginManager(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 login_manager.session_protection = 'strong'
-login_manager.login_view = 'auth.process'
+login_manager.login_view = 'auth.me'
+login_manager.login_message = "You should login to continue."
+login_manager.login_message_category = "info"
+
 
 from app import models
 
@@ -31,3 +35,6 @@ def index():
 
 from app.auth.views import admin
 app.register_blueprint(auth.views.admin,url_prefix = '/authentication')
+
+from app.main.views import welcome
+app.register_blueprint(main.views.welcome,url_prefix = '/welcome')

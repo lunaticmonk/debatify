@@ -44,6 +44,10 @@
         <!--Grids-->
         <ul class="collapsible popout" data-collapsible="accordion" id = "accordion">
             <!--The dynamic list part comes here-->
+            {% for issue in issues %}
+            <div class = "collapsible-header">{{ issue.topic }}</div>
+            <div class = "collapsible-header">{{ issue.questionssss }}</div>
+            {% endfor %}
         </ul>
         <!--Grids end-->
         <!--Modal-->
@@ -52,25 +56,26 @@
           <div id="modal1" class="modal">
             <div class="modal-content">
               <div class="row">
-                <form class="col s12">
+                <form class="col s12" action = "{{url_for('main.index')}}" method = "POST">
                   <div class="row">
                     <div class="input-field col s12">
-                      <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <textarea id="textarea1" class="materialize-textarea" name = "question-textarea"></textarea>
                       <label for="textarea1">Question</label>
                     </div>
                     <div class = "col s12">
                       <label for="topic">Topic</label>
-                      <textarea id="topic" class="materialize-textarea"></textarea>
+                      <textarea id="topic" class="materialize-textarea" name = "topic-textarea"></textarea>
                     </div>
                   </div>
+            <div class="modal-footer">
+              <button class=" modal-action modal-close waves-effect waves-green btn-flat" id = "raisebtn" onsubmit = "submit">Raise</button>
+            </div>
                 </form>
                 </div>
             </div>
-            <div class="modal-footer">
-              <button class=" modal-action modal-close waves-effect waves-green btn-flat" id = "raisebtn">Raise</button>
-            </div>
           </div>
         <!--Modal end-->
+        <div>{{ name }}</div>
 
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src = "{{url_for('static',filename = "assets/materialize/js/materialize.min.js")}}"></script>
