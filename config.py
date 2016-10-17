@@ -15,7 +15,7 @@ class Production(Config):
 	DEBUG = True
 
 class Testing(Config):
-	DEBUD = True
+	DEBUG = True
 
 config = {
 	'CONFIG' : Config,

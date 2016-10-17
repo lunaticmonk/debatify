@@ -1,0 +1,26 @@
+{% extends 'me.html' %}
+
+{% block title %}Profile{% endblock %}
+{% block signed_in_as %}Signed in as : {{user.username}}{% endblock %}
+{% block page_content %}
+<div class = "container">
+	<div class = "row">
+		<form action = "{{url_for('main.update_profile')}}" method = "POST">
+		<div class = "col s9">
+			<label for = "firstname">Firstname</label>
+			<input type = "text" placeholder = "{{ user.firstname | title}}" id = "firstname" name = "firstname">
+			<label for = "lastname">Lastname</label>
+			<input type = "text" placeholder = "{{ user.lastname | title }}" id = "lastname" name = "lastname">
+			<!-- <label for = "email">Email</label>
+			<input type = "email" placeholder = "{{user.email}}" id = "email"> -->
+			<label for = "about_me">About you</label>
+			<input type = "text" placeholder = "Tell us something about you." id = "about_me" name = "about_me">
+			<label for = "location">Location</label>
+			<input type = "text" placeholder = "Your Location" name = "location">
+			<input type = "submit" value = "Submit" class = "btn">
+		</div>
+		</form>
+		<div class = "col s3 card-panel"><img src="#" alt = "profile-picture"></div>
+	</div>
+</div>
+{% endblock %}

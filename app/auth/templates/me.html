@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% block head %}
+        <title>{% block title %}Dashboard{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/materialize/css/materialize.min.css")}}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <style type="text/css">
@@ -11,24 +13,26 @@
             margin-left: 1%;
         }
         </style>
+        {% endblock %}
     </head>
 
     <body>
         <div class = "container">
         </div>
             <!-- Dropdown Structure -->
+            {% block navbar %}
         <div class = "navbar-fixed">
             <ul id="dropdown1" class="dropdown-content">
-              <li><a href="#!">Profile</a></li>
+              <li><a href="{{url_for('main.profile')}}">Profile</a></li>
               <li><a href="#!">IDK</a></li>
               <li class="divider"></li>
               <li><a href="{{url_for('auth.logout')}}">Logout</a></li>
             </ul>
             <nav>
                 <div class = "nav-wrapper light-blue darken-2">
-                    <a href="{{url_for('index')}}" class="brand-logo">Debatify</a>
+                    <a href="{{url_for('auth.dashboard')}}" class="brand-logo">Debatify</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li>Hello, {{ firstname }}</li>
+                        <li>{% block signed_in_as %}Hello, {{ current_user.firstname | title }}{% endblock %}</li>
                         <li><a href="#modal1" class = "waves-effect waves-light btn modal-trigger">Raise a question</a></li>
                         <li><a href="#!">Poll</a></li>
                         <!--Dropdown trigger-->
@@ -37,13 +41,14 @@
                 </div>
             </nav>
         </div>
+        {% endblock %}
         <!--Navbar end-->
         <!--Grids-->
         <ul class="collapsible popout" data-collapsible="accordion" id = "accordion">
             <!--The dynamic list part comes here-->
                 {% for f in fetchedTopic %}
                 <li>
-                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{f.topic}}</div>
+                    <div class="collapsible-header"><i class="material-icons">note_add</i>{{f.topic}}</div>
                     <div class="collapsible-body"><p>{{f.questions}}</p></div>
                 </li>
                 {% endfor %}
@@ -74,9 +79,11 @@
             </div>
           </div>
         <!--Modal end-->
-
+        {% block page_content %}{% endblock %}
+        {% block scripts %}
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src = "{{url_for('static',filename = "assets/materialize/js/materialize.min.js")}}"></script>
         <script src = "{{url_for('static',filename = "assets/js/welcome.js")}}"></script>
+        {% endblock %}
     </body>
 </html>

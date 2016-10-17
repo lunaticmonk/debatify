@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin,AnonymousUserMixin
 from app import login_manager
 from app import db
+from datetime import datetime
 
 class User(UserMixin,db.Model):
 	__tablename__ = 'users'
@@ -15,7 +16,15 @@ class User(UserMixin,db.Model):
 	password_hash = db.Column(db.String(128), nullable = True)
 	confirmed = db.Column(db.Boolean, default = False)
 	question = db.relationship("Question", backref = "owner", lazy = 'dynamic')
-	# role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+	location = db.Column(db.String(64),nullable = True)
+	about_me = db.Column(db.Text(),nullable = True)
+	member_since = db.Column(db.DateTime(), default=datetime.utcnow,nullable = True)
+	last_seen = db.Column(db.DateTime(), default=datetime.utcnow,nullable = True)
+	#role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+
+	def ping(self):
+		self.last_seen = datetime.utcnow()
+		db.session.add(self)
 
 	# def __init__(self, **kwargs):
 	# 	super(User, self).__init__(**kwargs)

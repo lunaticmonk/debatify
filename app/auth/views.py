@@ -1,7 +1,8 @@
 from flask import Blueprint,render_template,request,flash,redirect,url_for,session,g
 from flask_login import login_required,login_user,logout_user,current_user
+from flask_mail import Mail,Message
 from app import models,login_manager
-from app import db
+from app import db,mail
 
 #app.config['DEBATIFY_ADMIN']=<'somunimkarde@gmail.com'>
 
@@ -47,11 +48,13 @@ def process():
 	#session['known'] = False
 	db.session.add(newUser)
 	db.session.commit()
+
+	
 	# if app.config['DEBATIFY_ADMIN']:
 	# 	send_email(app.config['DEBATIFY_ADMIN'],'New User','mail/new_user',user = newUser)
 
 	#return render_template('me.html', name = first_name)
-	return "<p>You are registered successfully.Please login to continue</p>"
+	return redirect(url_for('auth.login'))
 		#else:
 			#return '<p>Password didnt match</p>'
 
@@ -61,12 +64,18 @@ def loginprocess():
 	password = request.form['Password']
 	if g.user is not None and g.user.verify_password(password):
 		login_user(g.user)
+		current_user.ping()
 		#user_id = models.Question.query.filter_by(current_user).all()
 		fetchedTopic = models.Question.query.filter_by(user_id = g.user.id).all()
-		return render_template('me.html', firstname = g.user.firstname,fetchedTopic = fetchedTopic)
+		return render_template('me.html', fetchedTopic = fetchedTopic)
 	else:
 		flash('Invalid login')
 		return render_template('login.html')
+
+@admin.route('/dashboard')
+def dashboard():
+	fetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
+	return render_template('me.html', fetchedTopic = fetchedTopic)
 
 @admin.route('/logout')
 @login_required
@@ -75,7 +84,8 @@ def logout():
 	flash('You have been logged out.')
 	return redirect(url_for('auth.login'))
 
-# @admin.route('/secret')
-# @login_required
-# def secret():
-# 	return 'Only authenticated Users allowed'
+# @admin.route('/send_mail')
+# def send_mail():
+# 	msg = Message('Hello',sender = 'somunimkarde@gmail.com', recipients = ['blesssumedh@gmail.com','gajanannimkarde@gmail.com'])
+# 	mail.send(msg)
+# 	return 'Message sent'

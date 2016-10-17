@@ -27,7 +27,7 @@
                 <div class = "nav-wrapper light-blue darken-2">
                     <a href="{{url_for('index')}}" class="brand-logo">Debatify</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li>Hello, {{ firstname }}</li>
+                        <li>Hello, {{ current_user.firstname }}</li>
                         <li><a href="#modal1" class = "waves-effect waves-light btn modal-trigger">Raise a question</a></li>
                         <li><a href="#!">Poll</a></li>
                         <!--Dropdown trigger-->
