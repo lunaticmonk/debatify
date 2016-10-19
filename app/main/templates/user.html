@@ -9,39 +9,9 @@
 	</style>
 {% endblock %}
 
-{#<div class = "avatar-img"><img src=""></div>
-
-<div class = "user-info">
-{% block page_content %}
-<div class="page-header">
-	<h1>{{ user.username }}</h1>
-{% if user.name or user.location %}
-	<p>
-	{% if user.name %}{{ user.name }}{% endif %}
-	{% if user.location %}
-	From <a href="http://maps.google.com/?q={{ user.location }}">
-	{{ user.location }}
-	</a>
-	{% endif %}
-	</p>
-{% endif %}
-																{#{% if current_user.is_administrator() %}
-																	{% endif %}#}
-																	<p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
-{% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-	<p>
-	Member since {{ moment(user.member_since).format('L') }}.
-	Last seen {{ moment(user.last_seen).fromNow() }}.
-	</p>
-</div>
-</div>
-{% block scripts %}
-{{ super () }}
-{{ moment.include_moment() }}
-{% endblock %}#}
-
 {% block title %}Profile{% endblock %}
 {% block signed_in_as %}Signed in as : {{user.username}}{% endblock %}
+{% block questions %}<br>{% endblock %}
 {% block page_content %}
 <div class = "container">
 <div class = "row">
@@ -53,8 +23,10 @@
 			<div class = "flow-text"> Name : {{user.firstname}} {{user.lastname}}</div>
 			<div class = "flow-text"> Email : {{user.email}}</div>
 			<div class = "flow-text"> Username : {{user.username}}</div>
+			<div class = "flow-text"> Location : {{ user.location }}</div>
 			<div class = "flow-text"> Member since : {{ moment(user.member_since).format('LLL') }}</div>
 			<div class = "flow-text"> Last Seen : {{ moment(user.last_seen).fromNow() }}</div>
+			<div class = "flow-text">About : {{user.about_me }}</div>
 		</div>
 	</div>
 <a href = "{{url_for('main.edit')}}"><button class = "col s1 btn red lighten-2">Edit</button></a>

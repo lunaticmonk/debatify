@@ -44,15 +44,37 @@
         {% endblock %}
         <!--Navbar end-->
         <!--Grids-->
-        <ul class="collapsible popout" data-collapsible="accordion" id = "accordion">
-            <!--The dynamic list part comes here-->
-                {% for f in fetchedTopic %}
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">note_add</i>{{f.topic}}</div>
-                    <div class="collapsible-body"><p>{{f.questions}}</p></div>
-                </li>
-                {% endfor %}
-        </ul>   
+        {% block questions %}
+        <div class = "container">
+        <div class = "card-panel light-blue lighten-5">
+        <div class = "row">
+            <div class = "col s6">
+                <ul class="collapsible popout" data-collapsible="accordion" id = "accordion">
+                    <blockquote><h3>Questions by all</h3></blockquote>
+                    <!--The dynamic list part comes here-->
+                        {% for f in fetchedTopic %}
+                        <li>
+                            <div class="collapsible-header light-blue lighten-2"><i class="material-icons">note_add</i>{{f.topic}}</div>
+                            <div class="collapsible-body"><p>{{f.questions}}</p></div>
+                        </li>
+                        {% endfor %}
+                </ul>
+            </div>
+            <div class = "col s6">
+                <ul class="collapsible popout" data-collapsible="accordion" id = "accordion">
+                    <blockquote><h3>Questions raised by you</h3></blockquote>
+                    {% for s in CurrentUsersfetchedTopic %}
+                        <li>
+                            <div class="collapsible-header light-blue lighten-2"><i class="material-icons">note_add</i>{{s.topic}}</div>
+                            <div class="collapsible-body"><p>{{s.questions}}</p></div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        </div>
+        </div>
+        {% endblock %}
         <!--Grids end-->
         <!--Modal-->
 <!--           <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>

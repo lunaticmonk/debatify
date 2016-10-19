@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<ul id = "messages">
+
+		</ul>
+		<input type = "text" id = "myMessage">
+		<button id = "sendbtn">send</button>
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.0/socket.io.min.js"></script>
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		
+
+		<script type = "text/javascript">
+
+			$(document).ready(function(){
+				var socket = io.connect('http://127.0.0.1:5000/welcome/dashboard');
+				console.log(socket);
+				socket.on('connect',function(){
+					socket.send(' User has connected!!');
+				});
+				// // var msg = "Hello there";
+				// socket.on('message', function(msg){
+				// 	$('#messages').append('<li>' + msg + '</li>');
+				// });
+
+				// $('#sendbtn').onclick(function(){
+				// 	socket.send('#myMessage').val();
+				// 	$('myMessage').val(' ');
+				// });
+
+			});
+
+		</script>
+	</body>
+</html>

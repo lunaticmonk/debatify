@@ -3,6 +3,7 @@ from flask_login import login_required,login_user,logout_user,current_user
 from flask_mail import Mail,Message
 from app import models,login_manager
 from app import db,mail
+from app.models import load_user
 
 #app.config['DEBATIFY_ADMIN']=<'somunimkarde@gmail.com'>
 
@@ -32,6 +33,7 @@ def privacy():
 def about():
 	return render_template('about.html')
 
+@login_required
 @admin.route('/process', methods = ['GET','POST'])
 def process():
 	first_name = request.form['first_name']
@@ -58,6 +60,7 @@ def process():
 		#else:
 			#return '<p>Password didnt match</p>'
 
+@login_required
 @admin.route('/me',methods = ['GET','POST'])
 def loginprocess():
 	g.user = models.User.query.filter_by(email = request.form['Email']).first()
@@ -66,16 +69,18 @@ def loginprocess():
 		login_user(g.user)
 		current_user.ping()
 		#user_id = models.Question.query.filter_by(current_user).all()
-		fetchedTopic = models.Question.query.filter_by(user_id = g.user.id).all()
-		return render_template('me.html', fetchedTopic = fetchedTopic)
+		fetchedTopic = models.Question.query.all()
+		CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
+		return render_template('me.html', fetchedTopic = fetchedTopic, CurrentUsersfetchedTopic = CurrentUsersfetchedTopic)
 	else:
 		flash('Invalid login')
 		return render_template('login.html')
 
 @admin.route('/dashboard')
 def dashboard():
-	fetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
-	return render_template('me.html', fetchedTopic = fetchedTopic)
+	fetchedTopic = models.Question.query.all()
+	CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
+	return render_template('me.html', fetchedTopic = fetchedTopic,CurrentUsersfetchedTopic = CurrentUsersfetchedTopic)
 
 @admin.route('/logout')
 @login_required
