@@ -6,6 +6,7 @@ from flask_script import Manager,Shell
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from flask_moment import Moment
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -26,6 +27,7 @@ bootstrap = Bootstrap()
 db = SQLAlchemy(app)
 mail = Mail(app)
 moment = Moment(app)
+socketio = SocketIO(app)
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'

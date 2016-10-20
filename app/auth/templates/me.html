@@ -74,6 +74,7 @@
         </div>
         </div>
         </div>
+        <a href="{{url_for('main.chatroom')}}">Click here to go to chatroom.</a>
         {% endblock %}
         <!--Grids end-->
         <!--Modal-->
@@ -94,7 +95,7 @@
                     </div>
                   </div>
             <div class="modal-footer">
-              <button class=" modal-action modal-close waves-effect waves-green btn-flat" id = "raisebtn" onsubmit = "submit">Raise</button>
+              <button class=" modal-action modal-close waves-effect waves-green btn-flat" id = "raisebtn" onsubmit = "submit" onclick = window.location.href = "{{url_for('auth.dashboard')}}">Raise</button>
             </div>
                 </form>
                 </div>
