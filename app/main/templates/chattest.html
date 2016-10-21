@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatroom</title>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = "assets/css/chattest.css")}}">
+  {{ moment.include_moment() }}
+</head>
+
+<body>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.0/socket.io.min.js"></script>
+    <div class="menu">
+        <div class="back"><i class="fa fa-chevron-left"></i> <img src="http://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+        <div class="name">Alex</div>
+        <div class="last">18:09</div>
+    </div>
+    <ol class="chat">
+      <!-- <li class="other">
+          <div class="avatar"><img src="http://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+          <div class="msg">
+            <p>Hola!</p>
+            <p>Te vienes a cenar al centro? <emoji class="pizza"/></p>
+            <time>20:17</time>
+          </div>
+      </li>
+      <li class="self">
+          <div class="avatar"><img src="http://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+          <div class="msg">
+            <p>Puff...</p>
+            <p>Aún estoy haciendo el contexto de Góngora... <emoji class="books"/></p>
+            <p>Mejor otro día</p>
+            <time>20:18</time>
+          </div>
+      </li> -->
+    </ol>
+    <input class="textarea" type="text" placeholder="Type here!" id = "usermsg"/><div class="emojis"></div>
+        <script type = "text/javascript" charset="utf-8">
+        $(document).ready(function(){
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('connect', function(){
+          console.log('connected!');
+          socket.send('{{user.firstname}} Connected!');
+        });
+
+        socket.on('message', function(msg){
+          $('.chat').append('<li class = "self">' + '<div class = "msg">' +  msg + '</div>' + '</li>' + '\n');
+          //console.log('Received message');
+        });
+
+        $('#usermsg').keypress(function(e){
+          console.log('hello');
+          var code = e.keyCode || e.which;
+          if(code == 13){
+            var stext = $('#usermsg').val();
+            console.log(stext);
+            $('#usermsg').val(' ');
+            socket.emit('text', { msg : stext });
+          }
+        });
+    //             socket.on('status', function(data) {
+        //  $('#messages').append('<li>' + data.msg + '</li>');
+
+    //             });
+    //             socket.on('message', function(data) {
+        //  $('#messages').append('<li>' + data.msg + '</li>' + '\n');
+
+    //             });
+
+        //    $('#sendbtn').on('click',function(){
+        //  text = $('#myMessage').val();
+        //    $('#myMessage').val(' ');
+        //    socket.emit('text', {msg: text});
+        // });
+    //         });
+
+      });
+        </script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 from flask import Blueprint,render_template,request,flash,g,redirect,url_for,flash
-from app import db,moment,socketio
+from app import db,moment,socketio,moment
 from app.models import User,Question,load_user
-from flask_login import current_user
+from flask_login import current_user,login_required
 from flask_moment import Moment
 from datetime import datetime
 from flask_socketio import emit,send
@@ -38,19 +38,24 @@ def update_profile():
 	flash('You have succesfully updated the info.')
 	return redirect(url_for('main.profile'))
 
-@welcome.route('/chatroom', methods = ['GET','POST'])
-def chat():
-	#if( request.form['name'] and request.form['room'] != null):
-	return render_template('chatroom.html', name = request.form['name'], room = request.form['room'], user = current_user)
+# @welcome.route('/chatroom', methods = ['GET','POST'])
+# def chat():
+# 	#if( request.form['name'] and request.form['room'] != null):
+# 	return render_template('chatroom.html', name = request.form['name'], room = request.form['room'], user = current_user)
 
 @welcome.route('/chat')
+@login_required
 def chatroom():
-	return render_template('chat.html')
+	return render_template('chattest.html', user = current_user)
 
 @socketio.on('message')
 def handleMessage(message):
 	print 'Message : ' + message
 	send(message, broadcast = True)
+
+@socketio.on('text')
+def text(data):
+	emit('message', { 'msg' : data.msg})
 
 # @socketio.on('joined')
 # def joined(data):
