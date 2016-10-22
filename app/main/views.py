@@ -7,7 +7,7 @@ from datetime import datetime
 from flask_socketio import emit,send
 
 
-welcome = Blueprint('main',__name__, template_folder = "templates")
+welcome = Blueprint('main',__name__, template_folder = "templates", static_folder = "static")
 
 @welcome.route('/', methods = ["GET","POST"])
 def index():
@@ -48,6 +48,11 @@ def update_profile():
 def chatroom():
 	return render_template('chattest.html', user = current_user)
 
+@socketio.on('joined')
+def joined(data):
+	print data
+	emit('status', data, broadcast = True)
+
 @socketio.on('message')
 def handleMessage(message):
 	print 'Message : ' + message
@@ -55,7 +60,8 @@ def handleMessage(message):
 
 @socketio.on('text')
 def text(data):
-	emit('message', { 'msg' : data.msg})
+	print data
+	emit('show', data, broadcast = True)
 
 # @socketio.on('joined')
 # def joined(data):

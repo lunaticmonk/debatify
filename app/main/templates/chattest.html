@@ -33,29 +33,34 @@
           </div>
       </li> -->
     </ol>
-    <input class="textarea" type="text" placeholder="Type here!" id = "usermsg"/><div class="emojis"></div>
+        <input class="textarea" type="text" placeholder="Type here!" id = "usermsg"/><div class="emojis"></div>
+        <button id = "sendbtn"><img src="{{url_for('static', filename = "/img/sendbtn.png")}}"></button>
+        
+
         <script type = "text/javascript" charset="utf-8">
         $(document).ready(function(){
         var socket = io.connect('http://' + document.domain + ':' + location.port);
         socket.on('connect', function(){
-          console.log('connected!');
-          socket.send('{{user.firstname}} Connected!');
+          //console.log('connected!');
+          socket.emit('joined',{'joinmsg' : '{{user.firstname}} Connected!'});
         });
 
-        socket.on('message', function(msg){
-          $('.chat').append('<li class = "self">' + '<div class = "msg">' +  msg + '</div>' + '</li>' + '\n');
-          //console.log('Received message');
+        socket.on('status', function(connectmsg){
+          $('.chat').append('<li class = "self">' + '<div class = "msg">' +  connectmsg.joinmsg + '</div>' + '</li>' + '\n');
+          console.log(connectmsg);
         });
 
-        $('#usermsg').keypress(function(e){
-          console.log('hello');
-          var code = e.keyCode || e.which;
-          if(code == 13){
-            var stext = $('#usermsg').val();
-            console.log(stext);
-            $('#usermsg').val(' ');
-            socket.emit('text', { msg : stext });
-          }
+
+        $('#sendbtn').on('click',function(){
+          var text = $('#usermsg').val();
+          console.log(text);
+          //text.val('');
+          socket.emit('text',text);
+        });
+        socket.on('show', function(message){
+          console.log('Received');
+          console.log(message);
+          $('.chat').append('<li class = "self">' + '<div class = "msg">' +  message + '</div>' + '</li>' + '\n');
         });
     //             socket.on('status', function(data) {
         //  $('#messages').append('<li>' + data.msg + '</li>');
