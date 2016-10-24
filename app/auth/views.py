@@ -7,7 +7,7 @@ from app.models import load_user
 
 #app.config['DEBATIFY_ADMIN']=<'somunimkarde@gmail.com'>
 
-admin = Blueprint('auth',__name__, template_folder = "templates")
+admin = Blueprint('auth',__name__, template_folder = "templates", static_folder = "static")
 
 @admin.route('/')
 def index():
@@ -80,6 +80,7 @@ def loginprocess():
 def dashboard():
 	fetchedTopic = models.Question.query.all()
 	CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
+	# id_all = models.Question.query.filter_by(id).all()
 	return render_template('me.html', fetchedTopic = fetchedTopic,CurrentUsersfetchedTopic = CurrentUsersfetchedTopic)
 
 @admin.route('/logout')

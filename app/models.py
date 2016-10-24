@@ -1,4 +1,6 @@
+import hashlib
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask import request
 #from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import UserMixin,AnonymousUserMixin
 from app import login_manager
@@ -25,6 +27,15 @@ class User(UserMixin,db.Model):
 	def ping(self):
 		self.last_seen = datetime.utcnow()
 		db.session.add(self)
+
+	def gravatar(self, size=100, default='identicon', rating='g'):
+		if request.is_secure:
+			url = 'https://secure.gravatar.com/avatar'
+		else:
+			url = 'http://www.gravatar.com/avatar'
+		hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
+		return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+			url=url, hash=hash, size=size, default=default, rating=rating)	
 
 	# def __init__(self, **kwargs):
 	# 	super(User, self).__init__(**kwargs)
@@ -61,7 +72,18 @@ class Question(db.Model):
 	id = db.Column(db.Integer, primary_key = True)
 	questions = db.Column(db.String(500))
 	topic = db.Column(db.String(500))
+	link = db.Column(db.String)
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+	question = db.relationship("Chats", backref = "chat_no", lazy = 'dynamic')
+
+
+class Chats(db.Model):
+	__tablename__ = "chats"
+	id = db.Column(db.Integer, primary_key = True)
+	messages = db.Column(db.String)
+	time = db.Column(db.String(100))
+	chat_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
+
 
 # class Role():
 # 	__tablename__ = 'roles'

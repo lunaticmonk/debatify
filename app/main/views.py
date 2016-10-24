@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template,request,flash,g,redirect,url_for,flash
 from app import db,moment,socketio,moment
-from app.models import User,Question,load_user
+from app.models import User,Question,load_user,Chats
 from flask_login import current_user,login_required
 from flask_moment import Moment
 from datetime import datetime
@@ -13,7 +13,8 @@ welcome = Blueprint('main',__name__, template_folder = "templates", static_folde
 def index():
 	savedQuestion = request.form['topic-textarea']
 	savedTopic = request.form['question-textarea']
-	topicandquestion = Question(topic = savedTopic,questions = savedQuestion, owner = current_user)
+	link = 'http://127.0.0.1:5000/welcome/chat/<chat_id>'
+	topicandquestion = Question(topic = savedTopic,questions = savedQuestion, owner = current_user, link = link)
 	db.session.add(topicandquestion)
  	db.session.commit()
 	return redirect(url_for('auth.dashboard'))
@@ -43,10 +44,14 @@ def update_profile():
 # 	#if( request.form['name'] and request.form['room'] != null):
 # 	return render_template('chatroom.html', name = request.form['name'], room = request.form['room'], user = current_user)
 
-@welcome.route('/chat')
+@welcome.route('/chat', methods = ['GET','POST'])
 @login_required
 def chatroom():
-	return render_template('chattest.html', user = current_user)
+	#your_chat = Chats.query.filter_by(id = 1).first()
+	global chat_id
+	chat_id = request.args.get('chat_id')
+	fetchedChat = Chats.query.filter_by(chat_id = chat_id).all()
+	return render_template('chattest.html', user = current_user, current_time = datetime.utcnow(), chat_id = chat_id, fetchedChat = fetchedChat)
 
 @socketio.on('joined')
 def joined(data):
@@ -61,6 +66,11 @@ def handleMessage(message):
 @socketio.on('text')
 def text(data):
 	print data
+	message = data
+	time = datetime.utcnow()
+	chat = Chats(messages = message, time = time, chat_id = chat_id)
+	db.session.add(chat)
+	db.session.commit()
 	emit('show', data, broadcast = True)
 
 # @socketio.on('joined')

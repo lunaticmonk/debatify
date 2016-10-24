@@ -10,11 +10,24 @@
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.0/socket.io.min.js"></script>
     <div class="menu">
-        <div class="back"><i class="fa fa-chevron-left"></i> <img src="http://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-        <div class="name">Alex</div>
-        <div class="last">18:09</div>
+        <div class="back"><a href = "{{url_for('auth.dashboard')}}"><i class="fa fa-chevron-left"></i> <img src="{{ user.gravatar(size = 256)}}" draggable="false"/></a></div>
+        <div class="name">{{user.firstname}}</div>
+        <div class="last">{{ current_time }}</div>
     </div>
     <ol class="chat">
+      <!--the dynamic list of chats goes here-->
+        {% for message in fetchedChat %}
+        <li class = "other">
+          <div class="avatar"><img src="{{ user.gravatar() }}" draggable="false"/></div>
+          <div class="msg">
+            {{ message.messages }}
+            <time>{{ message.time }}</time>
+          </div>
+        </li>
+        <br>
+        {% endfor %}
+
+      <!-- end list-->
       <!-- <li class="other">
           <div class="avatar"><img src="http://i.imgur.com/DY6gND0.png" draggable="false"/></div>
           <div class="msg">
@@ -34,8 +47,7 @@
       </li> -->
     </ol>
         <input class="textarea" type="text" placeholder="Type here!" id = "usermsg"/><div class="emojis"></div>
-        <button id = "sendbtn"><img src="{{url_for('static', filename = "/img/sendbtn.png")}}"></button>
-        
+        <div id = "sendbtn"></div>
 
         <script type = "text/javascript" charset="utf-8">
         $(document).ready(function(){
@@ -46,7 +58,14 @@
         });
 
         socket.on('status', function(connectmsg){
-          $('.chat').append('<li class = "self">' + '<div class = "msg">' +  connectmsg.joinmsg + '</div>' + '</li>' + '\n');
+            // $('.chat').append('<li class = "self">'
+            //  + '<div class="avatar"><img src="{{ user.gravatar() }}" draggable="false"/></div>'
+            //   + '<div class = "msg">' + 'This is chat id : ' + '{{ chat_id }}' + '</div>'
+            //    + '</li>' + '\n');
+
+
+        
+          $('.chat').append('<li class = "other">' + '<div class="avatar"><img src="{{ user.gravatar() }}" draggable="false"/></div>' + '<div class = "msg">' +  connectmsg.joinmsg + '</div>' + '</li>' + '\n');
           console.log(connectmsg);
         });
 
@@ -54,7 +73,7 @@
         $('#sendbtn').on('click',function(){
           var text = $('#usermsg').val();
           console.log(text);
-          //text.val('');
+          $('#usermsg').val('');
           socket.emit('text',text);
         });
         socket.on('show', function(message){

@@ -54,8 +54,8 @@
                     <!--The dynamic list part comes here-->
                         {% for f in fetchedTopic %}
                         <li>
-                            <div class="collapsible-header light-blue lighten-2"><i class="material-icons">note_add</i>{{f.topic}}</div>
-                            <div class="collapsible-body"><p>{{f.questions}}</p></div>
+                            <div class="collapsible-header light-blue lighten-2"><i class="material-icons">note_add</i>{{f.id}} : {{f.topic}}</div>
+                            <div class="collapsible-body"><p><a href = "{{ url_for('main.chatroom', chat_id = f.id)}}">{{f.questions}}</a></p></div>
                         </li>
                         {% endfor %}
                 </ul>
@@ -65,7 +65,7 @@
                     <blockquote><h3>Questions raised by you</h3></blockquote>
                     {% for s in CurrentUsersfetchedTopic %}
                         <li>
-                            <div class="collapsible-header light-blue lighten-2"><i class="material-icons">note_add</i>{{s.topic}}</div>
+                            <div class="collapsible-header light-blue lighten-2"><i class="material-icons">note_add</i>{{s.id}} : {{s.topic}}</div>
                             <div class="collapsible-body"><p>{{s.questions}}</p></div>
                         </li>
                     {% endfor %}

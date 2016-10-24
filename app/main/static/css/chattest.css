@@ -332,3 +332,10 @@ input.textarea {
 .emojis:active {
     opacity: 0.9;
 }
+.sendbtn{
+    width : 2%;
+    height : 2%;
+    position: fixed;
+    left: 0;
+    bottom : 100px;
+}
