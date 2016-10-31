@@ -84,6 +84,7 @@ class Chats(db.Model):
 	messages = db.Column(db.String)
 	time = db.Column(db.String(100))
 	chat_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
+	sender_name = db.Column(db.String, nullable = True)
 
 
 # class Role():

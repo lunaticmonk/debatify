@@ -20,6 +20,7 @@
         <li class = "other">
           <div class="avatar"><img src="{{ user.gravatar() }}" draggable="false"/></div>
           <div class="msg">
+            <h5>{{ message.sender_name }}</h5>
             {{ message.messages }}
             <time>{{ message.time }}</time>
           </div>

@@ -68,7 +68,7 @@ def text(data):
 	print data
 	message = data
 	time = datetime.utcnow()
-	chat = Chats(messages = message, time = time, chat_id = chat_id)
+	chat = Chats(messages = message, time = time, chat_id = chat_id, sender_name = current_user.firstname)
 	db.session.add(chat)
 	db.session.commit()
 	emit('show', data, broadcast = True)
