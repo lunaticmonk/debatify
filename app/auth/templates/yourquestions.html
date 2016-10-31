@@ -1,0 +1,24 @@
+{% extends 'me.html' %}
+
+{% block head %}
+        <title>{% block title %}Your questions{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/materialize/css/materialize.min.css")}}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href = "{{url_for('static', filename = "assets/css/card.css")}}">
+{% endblock %}
+
+{% block questions %}
+	<div class = "main">
+		{% for f in CurrentUsersfetchedTopic %}
+			<div class = "card">
+		        <h5 class = "question"><a href = "{{url_for('main.chatroom', chat_id = f.id)}}">{{ f.questions }}</a></h5>
+		        <div class = "hashtags">#life&nbsp;#science&nbsp;#travel&nbsp;#philosophy</div>
+		        <img src="img/background3.jpg">
+		        <button>Up</button>
+		        <div class = "poll">.</div>
+		        <div class = "link"><a href="{{url_for('main.chatroom', chat_id = f.id)}}">Discussion room</a></div>
+		        <div class = "externals"><span>Comments : 67</span>&nbsp;<span>Views : 24</span></div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

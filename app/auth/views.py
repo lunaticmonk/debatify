@@ -71,7 +71,7 @@ def loginprocess():
 		#user_id = models.Question.query.filter_by(current_user).all()
 		fetchedTopic = models.Question.query.all()
 		CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
-		return render_template('me.html', fetchedTopic = fetchedTopic, CurrentUsersfetchedTopic = CurrentUsersfetchedTopic)
+		return render_template('me.html', fetchedTopic = fetchedTopic)
 	else:
 		flash('Invalid login')
 		return render_template('login.html')
@@ -81,7 +81,18 @@ def dashboard():
 	fetchedTopic = models.Question.query.all()
 	CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
 	# id_all = models.Question.query.filter_by(id).all()
-	return render_template('me.html', fetchedTopic = fetchedTopic,CurrentUsersfetchedTopic = CurrentUsersfetchedTopic)
+	return render_template('me.html', fetchedTopic = fetchedTopic)
+
+@admin.route('/yourquestions')
+def yourquestions():
+	CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
+	return render_template('yourquestions.html',CurrentUsersfetchedTopic = CurrentUsersfetchedTopic)
+
+# @admin.route('/upvote')
+# def upvote():
+# 	# upvotedQuestion = models.query.Question.filter_by(id).first()
+# 	# upvotedQuestion.upvotes += 1;
+# 	return 'hello'
 
 @admin.route('/logout')
 @login_required

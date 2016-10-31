@@ -5,14 +5,7 @@
         <title>{% block title %}Dashboard{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/materialize/css/materialize.min.css")}}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <style type="text/css">
-        .navbar-wrapper{
-            background-color: #0099ff;
-        }
-        #grids div{
-            margin-left: 1%;
-        }
-        </style>
+        <link rel="stylesheet" type="text/css" href = "{{url_for('static', filename = "assets/css/card.css")}}">
         {% endblock %}
     </head>
 
@@ -24,7 +17,7 @@
         <div class = "navbar-fixed">
             <ul id="dropdown1" class="dropdown-content">
               <li><a href="{{url_for('main.profile')}}">Profile</a></li>
-              <li><a href="#!">IDK</a></li>
+              <li><a href="{{url_for('auth.yourquestions')}}">Your Questions</a></li>
               <li class="divider"></li>
               <li><a href="{{url_for('auth.logout')}}">Logout</a></li>
             </ul>
@@ -33,10 +26,10 @@
                     <a href="{{url_for('auth.dashboard')}}" class="brand-logo">Debatify</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li>{% block signed_in_as %}Hello, {{ current_user.firstname | title }}{% endblock %}</li>
-                        <li><a href="#modal1" class = "waves-effect waves-light btn modal-trigger">Raise a question</a></li>
-                        <li><a href="#!">Poll</a></li>
+                        <li><a href="#modal1" class = "waves-effect waves-light btn cyan modal-trigger">Raise a question</a></li>
+                        <li><a href="#!" class = "btn cyan">Poll</a></li>
                         <!--Dropdown trigger-->
-                        <li><a href="#!" class = "dropdown-button" data-activates = "dropdown1">Account<i class="material-icons right">&bull;</i></a></li>
+                        <li><a href="" class = " cyan btn dropdown-button" data-activates = "dropdown1">Account<i class="material-icons right">&bull;</i></a></li>
                     </ul>
                 </div>
             </nav>
@@ -45,36 +38,21 @@
         <!--Navbar end-->
         <!--Grids-->
         {% block questions %}
-        <div class = "container">
-        <div class = "card-panel light-blue lighten-5">
-        <div class = "row">
-            <div class = "col s6">
-                <ul class="collapsible popout" data-collapsible="accordion" id = "accordion">
-                    <blockquote><h3>Questions by all</h3></blockquote>
-                    <!--The dynamic list part comes here-->
-                        {% for f in fetchedTopic %}
-                        <li>
-                            <div class="collapsible-header light-blue lighten-2"><i class="material-icons">note_add</i>{{f.id}} : {{f.topic}}</div>
-                            <div class="collapsible-body"><p><a href = "{{ url_for('main.chatroom', chat_id = f.id)}}">{{f.questions}}</a></p></div>
-                        </li>
-                        {% endfor %}
-                </ul>
-            </div>
-            <div class = "col s6">
-                <ul class="collapsible popout" data-collapsible="accordion" id = "accordion">
-                    <blockquote><h3>Questions raised by you</h3></blockquote>
-                    {% for s in CurrentUsersfetchedTopic %}
-                        <li>
-                            <div class="collapsible-header light-blue lighten-2"><i class="material-icons">note_add</i>{{s.id}} : {{s.topic}}</div>
-                            <div class="collapsible-body"><p>{{s.questions}}</p></div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+        <div class = "main">
+            {% for f in fetchedTopic %}
+                <div class = "card">
+                    <h5 class = "question"><a href = "{{url_for('main.chatroom', chat_id = f.id)}}">{{ f.questions }}</a></h5>
+                    <div class = "hashtags">#life&nbsp;#science&nbsp;#travel&nbsp;#philosophy</div>
+                    {% if image %}
+                    <img src="img/background3.jpg">
+                    {% endif %}
+                    <button id = "upvotebtn">Up</button>
+                    <div class = "poll">.</div>
+                    <div class = "link"><a href="{{url_for('main.chatroom', chat_id = f.id)}}">Discussion room</a></div>
+                    <div class = "externals"><span>Comments : 67</span>&nbsp;<span>Views : 24</span></div>
+                </div>
+            {% endfor %}
         </div>
-        </div>
-        </div>
-        <a href="{{url_for('main.chatroom')}}">Click here to go to chatroom.</a>
         {% endblock %}
         <!--Grids end-->
         <!--Modal-->

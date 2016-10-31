@@ -1,0 +1,63 @@
+/* line 5, ../sass/styles.scss */
+.card {
+  width: 50%;
+  height: 50%;
+  margin: 5% auto;
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  box-shadow: 1px 1px 80px 5px #e3e3e3;
+  padding-left: 3%;
+}
+/* line 14, ../sass/styles.scss */
+.card .hashtags {
+  color: #e3e3e3;
+  font-size: 1em;
+}
+/* line 18, ../sass/styles.scss */
+.card img {
+  border: 1px solid #e3e3e3;
+  box-shadow: 1px 5px 80px 5px #e3e3e3;
+  width: 80%;
+}
+/* line 23, ../sass/styles.scss */
+.card .link, .card .externals {
+  display: inline-block;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+/* line 28, ../sass/styles.scss */
+.card .externals {
+  float: right;
+  margin-right: 20%;
+  color: orange;
+}
+/* line 33, ../sass/styles.scss */
+.card .externals:hover span {
+  opacity: 50%;
+  text-decoration: underline;
+}
+/* line 38, ../sass/styles.scss */
+.card .poll {
+  border-radius: .2em;
+  width: 80%;
+  display: block;
+  background-color: #0099ff;
+}
+/* line 45, ../sass/styles.scss */
+.card .link a {
+  color: orange;
+  text-decoration: none;
+}
+/* line 49, ../sass/styles.scss */
+.card .link:hover {
+  opacity: 50%;
+  text-decoration: underline;
+}
+/* line 54, ../sass/styles.scss */
+.card .card button {
+  display: block;
+  position: relative;
+}
+.card{
+  margin-left: 2%;
+}
