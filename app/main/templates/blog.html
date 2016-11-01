@@ -1,0 +1,37 @@
+{% extends 'me.html' %}
+
+{% block head %}
+  {{ super () }}
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = "assets/css/blog.css")}}">
+  {{ moment.include_moment() }}
+{% endblock %}
+{% block title %}Blog{% endblock %}
+
+{% block page_content %}
+	<div class = "container">
+		<form action = "{{url_for('main.posted')}}" method = "POST">
+		<div class="input-field col s12">
+          <br>
+          <textarea id="textarea1" class="materialize-textarea" name = "postbody"></textarea>
+          <label for="textarea1">Posts</label>
+        </div>
+        <button class = "col s2 btn cyan" type = "submit">Release</button>
+
+        <div class = "posts">
+        	<div class = "post card-panel cyan">
+            {% if posts %}
+            {% for post in posts %}
+            <div class = "card-panel">
+              <img src="{{ post.author.gravatar( size = 40 ) }}" draggable="false"/>
+              <span id = "author_name">{{ post.author.firstname }}&nbsp;{{ post.author.lastname }}</span>
+              <p class = "timestamp">{{ post.timestamp }}</p>
+              <p class = "postbody">{{ post.body }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+    	</form>
+	</div>
+{% endblock %}
+{% block scripts %}{% endblock %}

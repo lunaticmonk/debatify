@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template,request,flash,g,redirect,url_for,flash
 from app import db,moment,socketio,moment
-from app.models import User,Question,load_user,Chats
+from app.models import User,Question,load_user,Chats,Posts
 from flask_login import current_user,login_required
 from flask_moment import Moment
 from datetime import datetime
@@ -52,6 +52,20 @@ def chatroom():
 	chat_id = request.args.get('chat_id')
 	fetchedChat = Chats.query.filter_by(chat_id = chat_id).all()
 	return render_template('chattest.html', user = current_user, current_time = datetime.utcnow(), chat_id = chat_id, fetchedChat = fetchedChat)
+
+@welcome.route('/blog')
+def blog():
+	posts = Posts.query.all()
+	return render_template('blog.html', posts = posts)
+
+@welcome.route('/posted', methods = ['GET','POST'])
+def posted():
+	postbody = request.form['postbody']
+	post = Posts(body = postbody, author = current_user)
+	db.session.add(post)
+	db.session.commit()
+	posts = Posts.query.all()
+	return render_template('blog.html', posts = posts)
 
 @socketio.on('joined')
 def joined(data):

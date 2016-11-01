@@ -1,0 +1,15 @@
+#author_name{
+	color: #009900;
+	font-weight: bold;
+	position: relative;
+	bottom: 2em;
+	left: .5em;
+}
+
+.postbody{
+	color: #000;
+}
+
+.timestamp{
+	float: right;
+}

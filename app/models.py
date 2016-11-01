@@ -22,6 +22,7 @@ class User(UserMixin,db.Model):
 	about_me = db.Column(db.Text(),nullable = True)
 	member_since = db.Column(db.DateTime(), default=datetime.utcnow,nullable = True)
 	last_seen = db.Column(db.DateTime(), default=datetime.utcnow,nullable = True)
+	posts = db.relationship('Posts', backref = 'author', lazy = 'dynamic')
 	#role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
 	def ping(self):
@@ -85,6 +86,13 @@ class Chats(db.Model):
 	time = db.Column(db.String(100))
 	chat_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
 	sender_name = db.Column(db.String, nullable = True)
+
+class Posts(db.Model):
+	__tablename__ = "posts"
+	id = db.Column(db.Integer, primary_key = True)
+	body = db.Column(db.Text)
+	timestamp = db.Column(db.DateTime, index = True, default = datetime.utcnow)
+	author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
 # class Role():
