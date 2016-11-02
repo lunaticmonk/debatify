@@ -82,10 +82,10 @@ def text(data):
 	print data
 	message = data
 	time = datetime.utcnow()
-	chat = Chats(messages = message, time = time, chat_id = chat_id, sender_name = current_user.firstname)
+	chat = Chats(messages = message, time = time, chat_id = chat_id, sender_name = current_user.firstname, messenger_id = current_user.id)
 	db.session.add(chat)
 	db.session.commit()
-	emit('show', data, broadcast = True)
+	emit('show', { 'msg' : data , 'messenger' : current_user.firstname }, broadcast = True)
 
 # @socketio.on('joined')
 # def joined(data):

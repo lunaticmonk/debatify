@@ -80,7 +80,7 @@
         socket.on('show', function(message){
           console.log('Received');
           console.log(message);
-          $('.chat').append('<li class = "self">' + '<div class = "msg">' +  message + '</div>' + '</li>' + '\n');
+          $('.chat').append('<li class = "self">' + '<div class="avatar"><img src="{{ user.gravatar() }}" draggable="false"/></div>' + '<div class = "msg">' + '<h5>' + message.messenger +  '</h5>' +  message.msg + '</div>' + '</li>' + '\n');
         });
     //             socket.on('status', function(data) {
         //  $('#messages').append('<li>' + data.msg + '</li>');
