@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template,request,flash,g,redirect,url_for,flash
 from app import db,moment,socketio,moment
-from app.models import User,Question,load_user,Chats,Posts
+from app.models import User,Question,load_user,Chats,Posts,Follow
 from flask_login import current_user,login_required
 from flask_moment import Moment
 from datetime import datetime
@@ -75,6 +75,43 @@ def posted():
 	posts = Posts.query.all()
 	return render_template('blog.html', posts = posts)
 
+# User following routes
+
+@welcome.route('/follow/<username>')
+@login_required
+def follow(username):
+	user = User.query.filter_by( username = username ).first()
+	if not user:
+		flash('Invalid User')
+		return redirect(url_for('main.user_profile'))
+	if current_user.is_following(user):
+		flash('You are already following this user')
+		return redirect(url_for('main.user_profile'))
+	current_user.follow(user)
+	flash('You are now following %s' % username)
+	return redirect(url_for('main.user_profile', user_id = user.id))
+
+@welcome.route('/followers')
+def followers():
+	return 'followers'
+
+@welcome.route('/followed_by')
+def followed_by():
+	return 'followed_by'
+
+@welcome.route('/unfollow/<username>')
+def unfollow( username ):
+	user = User.query.filter_by( username = username ).first()
+	if not user:
+		flash('Invalid User')
+	if current_user.is_following(user):
+		unfollowObject = Follow.query.filter(Follow.follower_id == current_user.id).filter(Follow.followed_id == user.id).first()
+		db.session.delete(unfollowObject)
+		db.session.commit()
+	return redirect(url_for('main.user_profile', user_id = user.id))
+
+
+# SocketIO routes
 @socketio.on('joined')
 def joined(data):
 	print data

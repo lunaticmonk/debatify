@@ -1,4 +1,9 @@
 /* line 5, ../sass/styles.scss */
+body{
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: bold;
+  font-size: 1.5em;
+}
 .card {
   width: 50%;
   height: 50%;

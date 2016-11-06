@@ -4,19 +4,37 @@
 	{{ super () }}
 	<style>
 		body{
-			color: #0099ff;
+			font-family: 'Josefin Sans', sans-serif;
+			font-size: 1.5em;
+			font-weight: bold;
+			margin: auto;
 		}
 		.profilepic{
 			float: left;
+			margin-right: 2%;
 		}
 	</style>
 {% endblock %}
 
 {% block page_content %}
-	<div class = "profilepic"><img src = "{{ profile_user.gravatar() }}"/></div>
-	<div>Name : {{ profile_user.firstname }}&nbsp;{{ profile_user.lastname }}</div>
-	<div>Email : {{ profile_user.email }}</div>
-	<div>Followers : {{default}}</div>
-	<div>Following : {{default}}</div>
+<div class = "container">
+	<br><br><br><br>
+	<div class = "profilepic"><img src = "{{ profile_user.gravatar( size = 200 ) }}"/></div>
+	<h4>{{ profile_user.firstname }}&nbsp;{{ profile_user.lastname }}</h4>
+	<p>{{ profile_user.about_me }}</p>
+	{% if not current_user.is_following(profile_user) %}
+		<a href = "{{url_for('main.follow', username = profile_user.username)}}" class = "btn cyan">Follow</a>
+	{% else %}
+		<a href = "{{url_for('main.unfollow', username = profile_user.username)}}" class = "btn cyan">Unfollow</a>
+	{% endif %}
+	<div>
+		<a href = "{{url_for('main.followers')}}">Followers : {{ profile_user.followers.count() }}</a>
+		<a href = "{{url_for('main.followed_by')}}">Following : {{ profile_user.followed.count() }}</a>
+	</div>
+
+	{% if profile_user.is_following(current_user) %}
+		<div>Follows you</div>
+	{% endif %}
+</div>
 
 {% endblock %}
