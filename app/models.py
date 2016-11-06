@@ -23,7 +23,7 @@ class User(UserMixin,db.Model):
 	member_since = db.Column(db.DateTime(), default=datetime.utcnow,nullable = True)
 	last_seen = db.Column(db.DateTime(), default=datetime.utcnow,nullable = True)
 	posts = db.relationship('Posts', backref = 'author', lazy = 'dynamic')
-	chats = db.relationship('Chats', backref = 'messenger', lazy = 'dynamic')
+	fetchedChat = db.relationship('Chats', backref = 'messenger', lazy = 'dynamic')
 	#role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
 	def ping(self):

@@ -58,6 +58,14 @@ def blog():
 	posts = Posts.query.all()
 	return render_template('blog.html', posts = posts)
 
+@welcome.route('/profile/')
+def user_profile():
+	user_id = request.args.get('user_id')
+	message = request.args.get('message')
+	profile_user = load_user(user_id)
+	print message
+	return render_template('profile.html', user_id = user_id, profile_user = profile_user)
+
 @welcome.route('/posted', methods = ['GET','POST'])
 def posted():
 	postbody = request.form['postbody']
@@ -82,10 +90,10 @@ def text(data):
 	print data
 	message = data
 	time = datetime.utcnow()
-	chat = Chats(messages = message, time = time, chat_id = chat_id, sender_name = current_user.firstname, messenger_id = current_user.id)
+	chat = Chats(messages = message, time = time, chat_id = chat_id, sender_name = current_user.firstname + ' ' + current_user.lastname, messenger_id = current_user.id)
 	db.session.add(chat)
 	db.session.commit()
-	emit('show', { 'msg' : data , 'messenger' : current_user.firstname }, broadcast = True)
+	emit('show', { 'msg' : data , 'messenger' : current_user.firstname + ' ' + current_user.lastname }, broadcast = True)
 
 # @socketio.on('joined')
 # def joined(data):

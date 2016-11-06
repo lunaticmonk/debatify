@@ -1,0 +1,22 @@
+{% extends 'me.html' %}
+
+{% block head %}
+	{{ super () }}
+	<style>
+		body{
+			color: #0099ff;
+		}
+		.profilepic{
+			float: left;
+		}
+	</style>
+{% endblock %}
+
+{% block page_content %}
+	<div class = "profilepic"><img src = "{{ profile_user.gravatar() }}"/></div>
+	<div>Name : {{ profile_user.firstname }}&nbsp;{{ profile_user.lastname }}</div>
+	<div>Email : {{ profile_user.email }}</div>
+	<div>Followers : {{default}}</div>
+	<div>Following : {{default}}</div>
+
+{% endblock %}
