@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,request,flash,redirect,url_for,session,g
+from flask import Blueprint,render_template,request,flash,redirect,url_for,session,g,jsonify
 from flask_login import login_required,login_user,logout_user,current_user
 from flask_mail import Mail,Message
 from app import models,login_manager
@@ -70,7 +70,7 @@ def loginprocess():
 		current_user.ping()
 		#user_id = models.Question.query.filter_by(current_user).all()
 		fetchedTopic = models.Question.query.all()
-		CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
+		#CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
 		return render_template('me.html', fetchedTopic = fetchedTopic)
 	else:
 		flash('Invalid login')
@@ -87,13 +87,17 @@ def dashboard():
 def yourquestions():
 	CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
 	return render_template('yourquestions.html',CurrentUsersfetchedTopic = CurrentUsersfetchedTopic)
-
-# @admin.route('/upvote')
-# def upvote():
-# 	# upvotedQuestion = models.query.Question.filter_by(id).first()
-# 	# upvotedQuestion.upvotes += 1;
-# 	return 'hello'
-
+# danger part
+@admin.route('/upvote')
+def upvote():
+	question = request.args.get('question')
+	print question
+	upvotedQuestion = models.Question.query.filter_by( questions = question ).first()
+	upvotedQuestion.upvotes += 1;
+	db.session.add(upvotedQuestion)
+	db.session.commit()
+	return jsonify(upvotedQuestion.upvotes)
+#
 @admin.route('/logout')
 @login_required
 def logout():

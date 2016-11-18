@@ -61,9 +61,7 @@ def blog():
 @welcome.route('/profile/')
 def user_profile():
 	user_id = request.args.get('user_id')
-	message = request.args.get('message')
 	profile_user = load_user(user_id)
-	print message
 	return render_template('profile.html', user_id = user_id, profile_user = profile_user)
 
 @welcome.route('/posted', methods = ['GET','POST'])

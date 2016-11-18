@@ -105,7 +105,7 @@ class Question(db.Model):
 	link = db.Column(db.String)
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	question = db.relationship("Chats", backref = "chat_no", lazy = 'dynamic')
-	upvotes = db.Column(db.Integer, nullable = True)
+	upvotes = db.Column(db.Integer, nullable = True, default = 1)
 
 
 class Chats(db.Model):

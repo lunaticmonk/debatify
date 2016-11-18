@@ -26,7 +26,7 @@
                 <div class = "nav-wrapper light-blue darken-2">
                     <a href="{{url_for('auth.dashboard')}}" class="brand-logo">Debatify</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li>{% block signed_in_as %}Hello, {{ current_user.firstname | title }}{% endblock %}</li>
+                        <li>{% block signed_in_as %}{{ current_user.firstname | title }}<img src = "{{ current_user.gravatar( size = 40 ) }}" />{% endblock %}</li>
                         <li><a href="#modal1" class = "waves-effect waves-light btn cyan modal-trigger">Raise a question</a></li>
                         <li><a href="{{url_for('main.blog')}}" class = "btn cyan">Blog</a></li>
                         <!--Dropdown trigger-->
@@ -42,14 +42,14 @@
         <div class = "main">
             {% for f in fetchedTopic %}
                 <div class = "card">
-                    <h5 class = "question"><a href = "{{url_for('main.chatroom', chat_id = f.id)}}">{{ f.questions }}</a></h5>
+                    <h5 id = "question"><a href = "{{url_for('main.chatroom', chat_id = f.id)}}">{{ f.questions }}</a></h5>
                     <div class = "hashtags">#life&nbsp;#science&nbsp;#travel&nbsp;#philosophy</div>
                     {% if image %}
                     <img src="img/background3.jpg">
                     {% endif %}
-                    <button id = "upvotebtn">Up</button>
+                    <img src="{{url_for('static', filename = "assets/img/upvotebtn.png")}}" id = "upvotebtn" alt = "upvotebtn">
                     <div class = "poll">.</div>
-                    <div class = "link"><a href="{{url_for('main.chatroom', chat_id = f.id)}}">Discussion room</a></div>
+                    <div class = "link"><a href="{{url_for('main.chatroom', chat_id = f.id)}}">{{ f.owner.firstname }} {{ f.owner.lastname }}</a></div>
                     <div class = "externals"><span>Comments : 67</span>&nbsp;<span>Views : 24</span></div>
                 </div>
             {% endfor %}
@@ -86,6 +86,17 @@
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src = "{{url_for('static',filename = "assets/materialize/js/materialize.min.js")}}"></script>
         <script src = "{{url_for('static',filename = "assets/js/welcome.js")}}"></script>
+        {# danger part#}
+        <script>
+            $('#upvotebtn').on('click', function(){
+                console.log(document.querySelector('#question a').innerHTML);
+                $.getJSON('{{url_for('auth.upvote')}}',{ question : document.querySelector('#question a').innerHTML },function(data){
+                    console.log(data);
+                    document.querySelector('#upvotebtn').innerHTML = data;
+                });
+                return false;
+            });
+        </script>
         {% endblock %}
     </body>
 </html>
