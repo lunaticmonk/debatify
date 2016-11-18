@@ -1,5 +1,2 @@
-# debatify
-A website for playing debates(Work in progress)
-
-
-LICENSE @MIT
+#Debatify
+It is an online debating platform where you can play debates, raise questions, polls. The backend is in Python( Flask ).
