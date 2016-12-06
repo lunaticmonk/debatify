@@ -1,5 +1,5 @@
 from flask import Blueprint,render_template,request,flash,g,redirect,url_for,flash
-from app import db,moment,socketio,moment
+from app import db,moment,socketio
 from app.models import User,Question,load_user,Chats,Posts,Follow
 from flask_login import current_user,login_required
 from flask_moment import Moment
@@ -55,7 +55,8 @@ def chatroom():
 
 @welcome.route('/blog')
 def blog():
-	posts = Posts.query.all()
+	posts = Posts.query.order_by(Posts.timestamp.desc()).all()
+	#posts = Posts.query.all()
 	return render_template('blog.html', posts = posts)
 
 @welcome.route('/profile/')

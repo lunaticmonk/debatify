@@ -66,3 +66,14 @@ body{
 .card{
   margin-left: 2%;
 }
+#upvotebtn, #downvotebtn{
+  float : right;
+  display: block;
+  width : 40px;
+  height : auto;
+  cursor : pointer;
+}
+.trending{
+  width : 30%;
+  margin-left : 10%;
+}

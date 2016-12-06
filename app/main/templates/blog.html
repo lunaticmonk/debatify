@@ -3,6 +3,7 @@
 {% block head %}
   {{ super () }}
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = "assets/css/blog.css")}}">
+  {{ moment.include_jquery() }}
   {{ moment.include_moment() }}
 {% endblock %}
 {% block title %}Blog{% endblock %}
@@ -24,7 +25,7 @@
             <div class = "card-panel">
               <img src="{{ post.author.gravatar( size = 40 ) }}" draggable="false"/>
               <span id = "author_name">{{ post.author.firstname }}&nbsp;{{ post.author.lastname }}</span>
-              <p class = "timestamp">{{ post.timestamp }}</p>
+              <p class = "timestamp">{{ moment(post.timestamp).fromNow() }}</p>
               <p class = "postbody">{{ post.body }}</p>
             </div>
             {% endfor %}

@@ -1,5 +1,9 @@
 {% extends 'me.html' %}
-
+{% block head %}
+	{{ super () }}
+	{{ moment.include_jquery() }}
+  	{{ moment.include_moment() }}
+{% endblock %}
 {% block title %}Profile{% endblock %}
 {% block signed_in_as %}Signed in as : {{user.username}}{% endblock %}
 {% block questions %}<br><br>{% endblock %}

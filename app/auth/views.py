@@ -70,8 +70,9 @@ def loginprocess():
 		current_user.ping()
 		#user_id = models.Question.query.filter_by(current_user).all()
 		fetchedTopic = models.Question.query.all()
+		trendingTopics = models.Question.query.order_by( models.Question.upvotes.desc() ).all()
 		#CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
-		return render_template('me.html', fetchedTopic = fetchedTopic)
+		return render_template('me.html', fetchedTopic = fetchedTopic, trendingTopics = trendingTopics)
 	else:
 		flash('Invalid login')
 		return render_template('login.html')
@@ -81,7 +82,8 @@ def dashboard():
 	fetchedTopic = models.Question.query.all()
 	CurrentUsersfetchedTopic = models.Question.query.filter_by(user_id = current_user.id).all()
 	# id_all = models.Question.query.filter_by(id).all()
-	return render_template('me.html', fetchedTopic = fetchedTopic)
+	trendingTopics = models.Question.query.order_by( models.Question.upvotes.desc() ).all()
+	return render_template('me.html', fetchedTopic = fetchedTopic, trendingTopics = trendingTopics)
 
 @admin.route('/yourquestions')
 def yourquestions():

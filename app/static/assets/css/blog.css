@@ -2,7 +2,7 @@
 	color: #009900;
 	font-weight: bold;
 	position: relative;
-	bottom: 2em;
+	bottom: 1em;
 	left: .5em;
 }
 
@@ -11,5 +11,6 @@
 }
 
 .timestamp{
+	font-size: .8em;
 	float: right;
 }

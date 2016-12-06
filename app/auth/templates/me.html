@@ -39,21 +39,31 @@
         <!--Navbar end-->
         <!--Grids-->
         {% block questions %}
-        <div class = "main">
+        <div class = "main row">
+            <div class = "col s6">
             {% for f in fetchedTopic %}
-                <div class = "card">
+                <div class = "card col s12">
                     <h5 id = "question"><a href = "{{url_for('main.chatroom', chat_id = f.id)}}">{{ f.questions }}</a></h5>
                     <div class = "hashtags">#life&nbsp;#science&nbsp;#travel&nbsp;#philosophy</div>
                     {% if image %}
-                    <img src="img/background3.jpg">
+                    <img src="{{url_for('static', filename = "assets/img/background3.jpg")}}">
                     {% endif %}
-                    <img src="{{url_for('static', filename = "assets/img/upvotebtn.png")}}" id = "upvotebtn" alt = "upvotebtn">
+                    <img src="{{url_for('static', filename = "assets/img/uparrow.png")}}" id = "upvotebtn" alt = "upvotebtn">
+                    <img src="{{url_for('static', filename = "assets/img/downarrow.png")}}" id = "downvotebtn" alt = "downvotebtn">
                     <div class = "poll">.</div>
                     <div class = "link"><a href="{{url_for('main.chatroom', chat_id = f.id)}}">{{ f.owner.firstname }} {{ f.owner.lastname }}</a></div>
                     <div class = "externals"><span>Comments : 67</span>&nbsp;<span>Views : 24</span></div>
                 </div>
             {% endfor %}
-        </div>
+            </div>
+            <div class = "trending col s3">
+                <h4>Trending</h4>
+                <ol>
+                    {% for topic in trendingTopics %}
+                        <li>{{ topic.questions }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
         {% endblock %}
         <!--Grids end-->
         <!--Modal-->
@@ -89,10 +99,10 @@
         {# danger part#}
         <script>
             $('#upvotebtn').on('click', function(){
+                console.log('clicked');
                 console.log(document.querySelector('#question a').innerHTML);
                 $.getJSON('{{url_for('auth.upvote')}}',{ question : document.querySelector('#question a').innerHTML },function(data){
                     console.log(data);
-                    document.querySelector('#upvotebtn').innerHTML = data;
                 });
                 return false;
             });

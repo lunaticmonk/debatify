@@ -3,6 +3,7 @@
 <head>
   <title>Chatroom</title>
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = "assets/css/chattest.css")}}">
+  {{ moment.include_jquery() }}
   {{ moment.include_moment() }}
 </head>
 
@@ -12,7 +13,7 @@
     <div class="menu">
         <div class="back"><a href = "{{url_for('auth.dashboard')}}"><i class="fa fa-chevron-left"></i> <img src="{{ user.gravatar(size = 256)}}" draggable="false"/></a></div>
         <div class="name">{{user.firstname}}</div>
-        <div class="last">{{ current_time }}</div>
+        <div class="last">{{ moment(current_time).format('LLL') }}</div>
     </div>
     <ol class="chat">
       <!--the dynamic list of chats goes here-->
@@ -27,50 +28,26 @@
         </li>
         <br>
         {% endfor %}
-
-      <!-- end list-->
-      <!-- <li class="other">
-          <div class="avatar"><img src="http://i.imgur.com/DY6gND0.png" draggable="false"/></div>
-          <div class="msg">
-            <p>Hola!</p>
-            <p>Te vienes a cenar al centro? <emoji class="pizza"/></p>
-            <time>20:17</time>
-          </div>
-      </li>
-      <li class="self">
-          <div class="avatar"><img src="http://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
-          <div class="msg">
-            <p>Puff...</p>
-            <p>Aún estoy haciendo el contexto de Góngora... <emoji class="books"/></p>
-            <p>Mejor otro día</p>
-            <time>20:18</time>
-          </div>
-      </li> -->
     </ol>
         <input class="textarea" type="text" placeholder="Type here!" id = "usermsg"/><div class="emojis"></div>
         <div id = "sendbtn"></div>
 
         <script type = "text/javascript" charset="utf-8">
         $(document).ready(function(){
+        window.scroll(0, document.height);
         var socket = io.connect('http://' + document.domain + ':' + location.port);
         socket.on('connect', function(){
           //console.log('connected!');
           socket.emit('joined',{'joinmsg' : '{{user.firstname}} Connected!'});
         });
 
+        // join msg
         socket.on('status', function(connectmsg){
-            // $('.chat').append('<li class = "self">'
-            //  + '<div class="avatar"><img src="{{ user.gravatar() }}" draggable="false"/></div>'
-            //   + '<div class = "msg">' + 'This is chat id : ' + '{{ chat_id }}' + '</div>'
-            //    + '</li>' + '\n');
-
-
-        
           $('.chat').append('<li class = "other">' + '<div class="avatar"><img src="{{ user.gravatar() }}" draggable="false"/></div>' + '<div class = "msg">' +  connectmsg.joinmsg + '</div>' + '</li>' + '\n');
           console.log(connectmsg);
         });
 
-
+        // sending a message
         $('#sendbtn').on('click',function(){
           var text = $('#usermsg').val();
           console.log(text);
