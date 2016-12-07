@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,request,flash,g,redirect,url_for,flash
+from flask import Blueprint,render_template,request,flash,g,redirect,url_for,flash,session
 from app import db,moment,socketio
 from app.models import User,Question,load_user,Chats,Posts,Follow
 from flask_login import current_user,login_required
@@ -50,6 +50,7 @@ def chatroom():
 	#your_chat = Chats.query.filter_by(id = 1).first()
 	global chat_id
 	chat_id = request.args.get('chat_id')
+	session['chat_id'] = chat_id
 	fetchedChat = Chats.query.filter_by(chat_id = chat_id).all()
 	return render_template('chattest.html', user = current_user, current_time = datetime.utcnow(), chat_id = chat_id, fetchedChat = fetchedChat)
 

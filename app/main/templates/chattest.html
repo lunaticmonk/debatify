@@ -3,6 +3,7 @@
 <head>
   <title>Chatroom</title>
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = "assets/css/chattest.css")}}">
+  <!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = "assets/materialize/css/materialize.min.css")}}"> -->
   {{ moment.include_jquery() }}
   {{ moment.include_moment() }}
 </head>
@@ -14,8 +15,14 @@
         <div class="back"><a href = "{{url_for('auth.dashboard')}}"><i class="fa fa-chevron-left"></i> <img src="{{ user.gravatar(size = 256)}}" draggable="false"/></a></div>
         <div class="name">{{user.firstname}}</div>
         <div class="last">{{ moment(current_time).format('LLL') }}</div>
-        <a href="{{ url_for('twitter.getTweets') }}"><button style = "float : right;" id = "tweetbtn" class = "btn">Chat no : {{ chat_id }}</button></a>
+        <button style = "float : right;" id = "tweetbtn">See what others are thinking....</button>
     </div>
+    <div class = "container" style = "width : 500px;
+                              height : 500px;
+                              background-color: #fff;
+                              overflow : scroll;
+                              position : fixed;
+                              right : 0;"></div>
     <ol class="chat">
       <!--the dynamic list of chats goes here-->
         {% for message in fetchedChat %}
@@ -33,8 +40,8 @@
         <input class="textarea" type="text" placeholder="Type here!" id = "usermsg"/><div class="emojis"></div>
         <div id = "sendbtn"></div>
 
-        <script type = "text/javascript" charset="utf-8">
-        $(document).ready(function(){
+    <script type = "text/javascript" charset="utf-8">
+      $(document).ready(function(){
         window.scroll(0, document.height);
         var socket = io.connect('http://' + document.domain + ':' + location.port);
         socket.on('connect', function(){
@@ -60,23 +67,43 @@
           console.log(message);
           $('.chat').append('<li class = "self">' + '<div class="avatar"><img src="{{ user.gravatar() }}" draggable="false"/></div>' + '<div class = "msg">' + '<h5>' + message.messenger +  '</h5>' +  message.msg + '</div>' + '</li>' + '\n');
         });
-    //             socket.on('status', function(data) {
-        //  $('#messages').append('<li>' + data.msg + '</li>');
-
-    //             });
-    //             socket.on('message', function(data) {
-        //  $('#messages').append('<li>' + data.msg + '</li>' + '\n');
-
-    //             });
-
-        //    $('#sendbtn').on('click',function(){
-        //  text = $('#myMessage').val();
-        //    $('#myMessage').val(' ');
-        //    socket.emit('text', {msg: text});
+        
+        //Simple ajax call
+        // $('#tweetbtn').on('click', function(){
+        //   console.log('clicked');
+        //   $.ajax({
+        //     type : 'GET',
+        //     url : '{{url_for('twitter.getTweets')}}',
+        //     dataType : 'json',
+        //     success : function(result){
+        //       console.log(result);
+        //     }
+        //   });
         // });
-    //         });
 
+
+        //Pure JavaScript ajax call
+        // var tweetbtn = document.querySelector('#tweetbtn');
+        // tweetbtn.addEventListener('click', function(){
+        //   var xhr = new XMLHttpRequest();
+        //   xhr.onreadystatechange = function(){
+        //     if( xhr.readyState == 4 && xhr.status == 200 ){
+        //       console.log( xhr.responseText );
+        //     }
+        //     else{
+        //       console.log('Error');
+        //     }
+        //   }
+        //   xhr.open('GET', '{{url_for('twitter.getTweets')}}', true);
+        //   xhr.send();
+        //   });
+
+        // jquery load
+
+        $('#tweetbtn').on('click', function(){
+          $('.container').load('{{url_for('twitter.getTweets')}}');
+        });
       });
-        </script>
+    </script>
   </body>
 </html>

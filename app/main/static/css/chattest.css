@@ -338,3 +338,9 @@ input.textarea {
     left: 0;
     bottom : 100px;
 }
+.container{
+    width : 500px;
+    height : 500px;
+    float : right;
+    background-color: #fff;
+}
